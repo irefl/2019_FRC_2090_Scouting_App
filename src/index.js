@@ -3,8 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import firebase from 'firebase';
 
 console.log("v1.0.0");
+
+const config = {
+    apiKey: "AIzaSyDqNearNomkDkz8cgGN5jkvnKUcxabHQ1g",
+    authDomain: "frc2090scouting.firebaseapp.com",
+    databaseURL: "https://frc2090scouting.firebaseio.com",
+    projectId: "frc2090scouting",
+    storageBucket: "frc2090scouting.appspot.com",
+    messagingSenderId: "536911532006"
+};
+firebase.initializeApp(config);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
