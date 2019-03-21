@@ -3,6 +3,14 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import Home from './Pages/Home';
+import Spinner from 'react-loader-spinner';
+
+const Loading = () => <><Spinner
+    type="Oval"
+    color="#005696"
+    height="100"
+    width="100"
+/></>;
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -29,17 +37,14 @@ class App extends Component {
     }
 
     render() {
-        const { currentUser } = this.state;
+        const { currentUser, loading } = this.state;
+        if (loading) {
+            return <><Loading /></>
+        }
         return (
             <>
                 {!currentUser &&
                     <>
-                        <button onClick={() => {
-                            firebase.auth().signInWithEmailAndPassword("scottallerdings2002@gmail.com", "testtest").then(d => {
-                                console.log(d);
-                            }).catch(e => console.log(e));
-                        }}>Log in as scott</button>
-
                         <button onClick={() => {
                             firebase.auth().signInWithRedirect(provider);
                         }}>Log in via google</button>
