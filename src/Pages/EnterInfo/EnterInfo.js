@@ -4,6 +4,7 @@ import BlueButton from '../../Components/BlueButton';
 import { Link } from 'react-router-dom';
 import TeamPicker from './TeamPicker/TeamPicker';
 import MatchNumberInput from './MatchNumberInput/MatchNumberInput';
+import AutonPointsPicker from './AutonPointsPicker/AutonPointsPicker';
 
 const Spacer = ({ space }) => {
     const marginTop = space || 0
@@ -13,6 +14,7 @@ const Spacer = ({ space }) => {
 const EnterInfo = () => {
     const [selectedTeam, setSelectedTeam] = useState(0);
     const [matchNumber, setMatchNumber] = useState(0);
+    const [selectedAuton, setSelectedAuton] = useState(-1);
 
     return <>
         <h1>Enter match information</h1>
@@ -29,6 +31,7 @@ const EnterInfo = () => {
         <Spacer space={10} />
         <h2>Autonomous</h2>
 
+        <AutonPointsPicker {...{ selectedAuton, setSelectedAuton }} />
 
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>
