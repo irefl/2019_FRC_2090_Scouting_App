@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ScoringConfigurations from '../../../Components/Constants/ScoringConfigurations';
 import { None, Cargo, Hatch, CargoAndHatch } from './Icons/Icons';
 
