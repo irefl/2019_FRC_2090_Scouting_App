@@ -6,6 +6,7 @@ import TeamPicker from './TeamPicker/TeamPicker';
 import MatchNumberInput from './MatchNumberInput/MatchNumberInput';
 import AutonPointsPicker from './AutonPointsPicker/AutonPointsPicker';
 import ScoringConfigurations from '../../Components/Constants/ScoringConfigurations';
+import Rocket from './Rocket/Rocket';
 
 const Spacer = ({ space }) => {
     const marginTop = space || 0
@@ -54,7 +55,7 @@ const EnterInfo = () => {
         <Spacer space={10} />
         <h2>Match</h2>
 
-
+        <Rocket rocket={nearRocket} setRocket={setNearRocket} />
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>
     </>
