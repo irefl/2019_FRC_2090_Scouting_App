@@ -55,7 +55,11 @@ const EnterInfo = () => {
         <Spacer space={10} />
         <h2>Match</h2>
 
+        <h3>Near Rocket</h3>
         <Rocket rocket={nearRocket} setRocket={setNearRocket} />
+
+        <h3>Far Rocket</h3>
+        <Rocket rocket={farRocket} setRocket={setFarRocket} />
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>
     </>

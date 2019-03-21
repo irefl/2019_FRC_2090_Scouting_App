@@ -28,7 +28,6 @@ const setCell = (rocket, setRocket, cellName) => {
 }
 
 const CargoCell = ({ name, value, rocket, setRocket }) => {
-    console.log(rocket);
     return <>
         <div style={{
             width: 51,
