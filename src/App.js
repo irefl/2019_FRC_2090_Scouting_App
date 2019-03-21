@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import Home from './Pages/Home';
-import Spinner from 'react-loader-spinner';
-
-const Loading = () => <><Spinner
-    type="Oval"
-    color="#005696"
-    height="100"
-    width="100"
-/></>;
+import 'bootstrap/dist/css/bootstrap.css';
+import LoadingSpinner from './Components/LoadingSpinner';
+import BlueButton from './Components/BlueButton';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -20,6 +16,8 @@ class App extends Component {
         loading: true
     }
 
+    // When the component mounts, connect to firebase and check if
+    // user is logged in or not
     componentDidMount = () => {
         this.auth = firebase.auth().onAuthStateChanged(user => {
             if (user) {
@@ -27,6 +25,7 @@ class App extends Component {
                     currentUser: user,
                     loading: false
                 });
+                toast.success("Login successful", { autoClose: 3000 })
             } else {
                 this.setState({
                     currentUser: null,
@@ -38,27 +37,41 @@ class App extends Component {
 
     render() {
         const { currentUser, loading } = this.state;
+
+        // If still loading, show a spinner instead.
         if (loading) {
-            return <><Loading /></>
+            return <LoadingSpinner />;
         }
+
         return (
-            <>
+            <div style={{
+                marginLeft: '5%',
+                marginRight: '5%',
+                marginTop: '2%'
+            }}>
+                <ToastContainer />
+                {/** If the user isn't logged in, show a button to log in via Google */}
                 {!currentUser &&
                     <>
-                        <button onClick={() => {
-                            firebase.auth().signInWithRedirect(provider);
-                        }}>Log in via google</button>
+                        <div style={{
+                            margin: 'auto',
+                            color: "#20508b"
+                        }}>
+                            <h1>FRC 2090 Scouting App 2019</h1>
+                            <h2>Built by William Kwok</h2>
+                            <BlueButton style={{ marginTop: 10 }}
+                                onClick={() => {
+                                    firebase.auth().signInWithRedirect(provider);
+                                }}
+                            >Log in via google</BlueButton>
+                        </div>
                     </>
                 }
 
-                {currentUser &&
-                    <Router>
-                        <Switch>
-                            <Route path="/" component={Home} />
-                        </Switch>
-                    </Router>
+                {/** If the user is logged in, enable different routes. */}
+                {currentUser && <Home currentUser={currentUser} />
                 }
-            </>
+            </div>
         );
     }
 }

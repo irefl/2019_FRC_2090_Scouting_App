@@ -1,7 +1,37 @@
+@font-face {
+    font-family: Quicksand;
+    src: url(./Assets/Fonts/Quicksand-Regular.ttf);
+}
+
+@font-face {
+    font-family: Quicksand;
+    src: url(./Assets/Fonts/Quicksand-Bold.ttf);
+    font-weight: bolder;
+}
+
+@font-face {
+    font-family: Quicksand;
+    src: url(./Assets/Fonts/Quicksand-Medium.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Quicksand;
+    src: url(./Assets/Fonts/Quicksand-Light.ttf);
+    font-weight: lighter;
+}
+
 body {
+    background-color: #eee !important;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: Quicksand, sans-serif !important;
+    font-weight: inherit !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2 {
+    font-weight: bold !important;
 }
