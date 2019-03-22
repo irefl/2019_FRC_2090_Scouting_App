@@ -118,7 +118,7 @@ const calculateScore = ({ selectedAuton, nearRocket, farRocket, cargo, habBonus 
     return score;
 }
 
-const EnterInfo = () => {
+const EnterInfo = ({ currentUser }) => {
     const [selectedTeam, setSelectedTeam] = useState(0);
     const [matchNumber, setMatchNumber] = useState(0);
     const [side, setSide] = useState("");
@@ -160,13 +160,16 @@ const EnterInfo = () => {
         {/** Team picker */}
         <TeamPicker {...{ selectedTeam, setSelectedTeam }} />
         <Spacer space={10} />
-        <SidePicker {...{ side, setSide }} />
-        <Spacer space={10} />
         {/** Match number */}
         <MatchNumberInput {...{ matchNumber, setMatchNumber }} />
         <Spacer space={10} />
-        <img src={HabPlatformsImage} alt={"Platform reference"} style={{ width: 150, border: "3px solid #20508b", borderRadius: 10 }} />
+        <h4>What side is the team on?</h4>
+        <SidePicker {...{ side, setSide }} />
+        <Spacer space={10} />
+
         <h2>Autonomous</h2>
+        <img src={HabPlatformsImage} alt={"Platform reference"} style={{ width: 150, border: "3px solid #20508b", borderRadius: 10 }} />
+        <Spacer space={10} />
         <AutonPointsPicker {...{ selectedAuton, setSelectedAuton }} />
 
         <Spacer space={10} />
@@ -182,7 +185,6 @@ const EnterInfo = () => {
                     <Rocket rocket={nearRocket} setRocket={setNearRocket} />
                 </Col>
                 <Col md={6}>
-                    <h3>Cargo Ship</h3>
                     <CargoShip {...{ rocket: cargo, setRocket: setCargo, side }} />
                 </Col>
             </Row>
@@ -230,7 +232,8 @@ const EnterInfo = () => {
                     cargo,
                     habBonus,
                     observations,
-                    score
+                    score,
+                    whoAdded: currentUser.email
                 });
 
                 // check if uploaded

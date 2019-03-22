@@ -3,7 +3,7 @@ import CargoCell from '../CargoCell/CargoCell';
 
 const CargoShip = ({ rocket, setRocket, side }) => {
     return <>
-
+        <h2>Cargo ship ({side === "" ? "LEFT" : side})</h2>
         <div>
             {(side === "LEFT" || side === "") &&
                 <div style={{ marginRight: 5, fontSize: '1.5em', display: "inline-block", width: 57 }}>Nose</div>
