@@ -24,7 +24,7 @@ const TeamStats = ({ teamData, selectedTeam }) => {
 
         <h3>Pictures</h3>
         {items.length > 0 ? <div className="carouselOut" style={{ width: window.innerWidth < 700 ? '100%' : '50%', margin: 'auto' }}>
-            <UncontrolledCarousel items={items} />
+            <UncontrolledCarousel items={items} autoplay={false} />
         </div> : <div>There are no pictures for this team</div>}
 
         <div><AddImage {...{ selectedTeam, imageCount: items.length }} /></div>
