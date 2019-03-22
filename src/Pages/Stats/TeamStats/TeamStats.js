@@ -15,7 +15,7 @@ const TeamStats = ({ teamData, selectedTeam }) => {
     return <>
         <h2>Viewing data about Team {selectedTeam}</h2>
         <div className="carouselOut" style={{ width: window.innerWidth < 700 ? '100%' : '50%', margin: 'auto' }}>
-            <UncontrolledCarousel items={items} />
+            <UncontrolledCarousel items={items} autoPlay={false} />
         </div>
     </>
 }
