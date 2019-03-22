@@ -7,6 +7,9 @@ import MatchNumberInput from './MatchNumberInput/MatchNumberInput';
 import AutonPointsPicker from './AutonPointsPicker/AutonPointsPicker';
 import ScoringConfigurations from '../../Components/Constants/ScoringConfigurations';
 import Rocket from './Rocket/Rocket';
+import SidePicker from './SidePicker/SidePicker';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import CargoShip from './CargoShip/CargoShip';
 
 const Spacer = ({ space }) => {
     const marginTop = space || 0
@@ -18,6 +21,7 @@ const { NONE } = ScoringConfigurations;
 const EnterInfo = () => {
     const [selectedTeam, setSelectedTeam] = useState(0);
     const [matchNumber, setMatchNumber] = useState(0);
+    const [side, setSide] = useState("");
     const [selectedAuton, setSelectedAuton] = useState(-1);
     const [nearRocket, setNearRocket] = useState({
         topLeft: NONE,
@@ -34,6 +38,16 @@ const EnterInfo = () => {
         midRight: NONE,
         botLeft: NONE,
         botRight: NONE
+    });
+    const [cargo, setCargo] = useState({
+        bay1: NONE,
+        bay2: NONE,
+        bay3: NONE,
+        bay4: NONE,
+        bay5: NONE,
+        bay6: NONE,
+        bay7: NONE,
+        bay8: NONE,
     })
     return <>
         <h1>Enter match information</h1>
@@ -41,12 +55,11 @@ const EnterInfo = () => {
         <h2>General info</h2>
         {/** Team picker */}
         <TeamPicker {...{ selectedTeam, setSelectedTeam }} />
-
         <Spacer space={10} />
-
+        <SidePicker {...{ side, setSide }} />
+        <Spacer space={10} />
         {/** Match number */}
         <MatchNumberInput {...{ matchNumber, setMatchNumber }} />
-
         <Spacer space={10} />
         <h2>Autonomous</h2>
 
@@ -55,11 +68,21 @@ const EnterInfo = () => {
         <Spacer space={10} />
         <h2>Match</h2>
 
-        <h3>Near Rocket</h3>
-        <Rocket rocket={nearRocket} setRocket={setNearRocket} />
+        <Grid>
+            <Row>
+                <Col md={6}>
+                    <h3>Near Rocket</h3>
+                    <Rocket rocket={nearRocket} setRocket={setNearRocket} />
 
-        <h3>Far Rocket</h3>
-        <Rocket rocket={farRocket} setRocket={setFarRocket} />
+                    <h3>Far Rocket</h3>
+                    <Rocket rocket={farRocket} setRocket={setFarRocket} />
+                </Col>
+                <Col md={6}>
+                    <h3>Cargo Ship</h3>
+                    <CargoShip {...{ rocket: cargo, setRocket: setCargo, side }} />
+                </Col>
+            </Row>
+        </Grid>
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>
     </>
