@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import BlueButton from '../../Components/BlueButton';
 import { Link } from 'react-router-dom';
-import TeamPicker from './TeamPicker/TeamPicker';
 import MatchNumberInput from './MatchNumberInput/MatchNumberInput';
 import AutonPointsPicker from './AutonPointsPicker/AutonPointsPicker';
+import TeamPicker from '../../Components/TeamPicker/TeamPicker';
 import ScoringConfigurations from '../../Components/Constants/ScoringConfigurations';
 import Rocket from './Rocket/Rocket';
 import SidePicker from './SidePicker/SidePicker';
@@ -18,11 +18,7 @@ import { TeamsMapping } from '../../Assets/Teams/Teams';
 import { toast } from 'react-toastify';
 import firebase from 'firebase/app';
 import 'firebase/database';
-
-const Spacer = ({ space }) => {
-    const marginTop = space || 0
-    return <div style={{ marginTop }}></div>
-}
+import Spacer from '../../Components/Spacer';
 
 const { NONE, CARGO, CARGO_AND_HATCH, HATCH } = ScoringConfigurations;
 

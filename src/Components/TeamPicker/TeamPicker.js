@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
     Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
 } from 'reactstrap';
-import { Teams, TeamsMapping } from '../../../Assets/Teams/Teams';
+import { Teams, TeamsMapping } from '../../Assets/Teams/Teams';
 
 const TeamPicker = ({ selectedTeam, setSelectedTeam }) => {
     const [dropOpen, setDropOpen] = useState(false);

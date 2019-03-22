@@ -41,7 +41,7 @@ const Home = ({ currentUser }) => {
                     <Switch>
                         <Route exact path="/" component={() => <MainPage currentUser={currentUser} />} />
                         <Route path="/enterinfo" component={() => <EnterInfo currentUser={currentUser} />} />
-                        <Route path="/stats/:team" component={() => <Stats currentUser={currentUser} />} />
+                        <Route path="/stats" component={(r) => <Stats currentUser={currentUser} />} />
                         <Route path="/allstats" component={() => <AllStats currentUser={currentUser} />} />
                     </Switch>
                 </Router>
