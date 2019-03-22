@@ -10,6 +10,7 @@ import Rocket from './Rocket/Rocket';
 import SidePicker from './SidePicker/SidePicker';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import CargoShip from './CargoShip/CargoShip';
+import HabPlatformsImage from '../../Assets/Images/HabPlatforms.png';
 
 const Spacer = ({ space }) => {
     const marginTop = space || 0
@@ -61,8 +62,8 @@ const EnterInfo = () => {
         {/** Match number */}
         <MatchNumberInput {...{ matchNumber, setMatchNumber }} />
         <Spacer space={10} />
+        <img src={HabPlatformsImage} alt={"Platform reference"} style={{ width: 150, border: "3px solid #20508b", borderRadius: 10 }} />
         <h2>Autonomous</h2>
-
         <AutonPointsPicker {...{ selectedAuton, setSelectedAuton }} />
 
         <Spacer space={10} />
