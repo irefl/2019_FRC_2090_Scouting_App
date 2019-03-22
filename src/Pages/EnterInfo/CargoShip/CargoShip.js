@@ -1,6 +1,5 @@
 import React from 'react';
 import CargoCell from '../CargoCell/CargoCell';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const CargoShip = ({ rocket, setRocket, side }) => {
     return <>

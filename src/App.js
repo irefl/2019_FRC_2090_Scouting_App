@@ -47,7 +47,8 @@ class App extends Component {
             <div style={{
                 marginLeft: '5%',
                 marginRight: '5%',
-                marginTop: '2%'
+                marginTop: '2%',
+                marginBottom: '5%'
             }}>
                 <ToastContainer />
                 {/** If the user isn't logged in, show a button to log in via Google */}

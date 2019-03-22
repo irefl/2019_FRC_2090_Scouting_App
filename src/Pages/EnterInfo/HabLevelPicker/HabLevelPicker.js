@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
-import {
-    Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
-} from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import HabLevels from '../../../Components/Constants/HabLevels';
 
-const Levels = [{
-    value: 0,
-    name: "No auto"
-}, {
-    value: 1,
-    name: "Attempted to move but didn't cross any lines"
-}, {
-    value: 2,
-    name: "COMPLETELY Crossed HAB line from level 1"
-}, {
-    value: 3,
-    name: "COMPLETELY Crossed HAB line from level 2"
-}, {
-    value: 4,
-    name: "Huge failure (details in notes)"
-}]
+const { NONE, LEVEL_1, LEVEL_2, LEVEL_3 } = HabLevels;
 
-const AutonPointsPicker = ({ selectedAuton, setSelectedAuton }) => {
+const Levels = [
+    { value: NONE, name: "None" },
+    { value: LEVEL_1, name: "Level 1" },
+    { value: LEVEL_2, name: "Level 2" },
+    { value: LEVEL_3, name: "Level 3" }
+]
+
+const LevelsMapping = {
+    [NONE]: "None",
+    [LEVEL_1]: "Level 1",
+    [LEVEL_2]: "Level 2",
+    [LEVEL_3]: "Level 3"
+}
+
+const HabLevelPicker = ({ habBonus, setHabBonus }) => {
     const [dropOpen, setDropOpen] = useState(false);
 
     return <Dropdown isOpen={dropOpen} toggle={() => setDropOpen(!dropOpen)} >
         <DropdownToggle caret style={{ backgroundColor: "#20508b" }}>
-            {selectedAuton !== -1 ? <>{Levels[selectedAuton].name}</> : <>Select an autonomous</>}
+            {habBonus !== "" ? <>{LevelsMapping[habBonus]}</> : <>Select a parking bonus</>}
         </DropdownToggle>
         <DropdownMenu modifiers={{
             setMaxHeight: {
@@ -45,10 +43,10 @@ const AutonPointsPicker = ({ selectedAuton, setSelectedAuton }) => {
         }}>
             {Levels.map(level => {
                 const { value, name } = level;
-                return <DropdownItem key={value} onClick={() => { setSelectedAuton(value) }}>{name}</DropdownItem>
+                return <DropdownItem key={value} onClick={() => { setHabBonus(value) }}>{name}</DropdownItem>
             })}
         </DropdownMenu>
     </Dropdown>
 }
 
-export default AutonPointsPicker;
+export default HabLevelPicker;

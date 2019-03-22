@@ -9,12 +9,12 @@ const setCell = (rocket, setRocket, cellName) => {
     const currCell = rocket[cellName];
     switch (currCell) {
         case NONE:
-            newRocket[cellName] = CARGO;
-            break;
-        case CARGO:
             newRocket[cellName] = HATCH;
             break;
         case HATCH:
+            newRocket[cellName] = CARGO;
+            break;
+        case CARGO:
             newRocket[cellName] = CARGO_AND_HATCH;
             break;
         case CARGO_AND_HATCH:
