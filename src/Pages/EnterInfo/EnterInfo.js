@@ -214,7 +214,7 @@ const EnterInfo = () => {
                 toast.info("Submitting data...");
 
                 // Check if match exists in database. If it does, abort and show an error.
-                const checkMatchDB = await firebase.database().ref(`2019data/${selectedTeam}/${matchNumber}`).once('value')
+                const checkMatchDB = await firebase.database().ref(`2019data/${selectedTeam}/match_data/${matchNumber}`).once('value')
                 const matchInDB = checkMatchDB.val();
                 if (matchInDB) {
                     toast.error("Match for this team has been recorded already!");
@@ -222,7 +222,7 @@ const EnterInfo = () => {
                 }
 
                 // If the match is not in the database, upload it.
-                await firebase.database().ref(`2019data/${selectedTeam}/${matchNumber}`).set({
+                await firebase.database().ref(`2019data/${selectedTeam}/match_data/${matchNumber}`).set({
                     side,
                     selectedAuton,
                     nearRocket,
@@ -234,7 +234,7 @@ const EnterInfo = () => {
                 });
 
                 // check if uploaded
-                const checkMatchUploaded = await firebase.database().ref(`2019data/${selectedTeam}/${matchNumber}`).once('value');
+                const checkMatchUploaded = await firebase.database().ref(`2019data/${selectedTeam}/match_data/${matchNumber}`).once('value');
                 const matchUploaded = checkMatchUploaded.val();
                 if (!matchUploaded) {
                     toast.error("Match failed to upload. Please try again in a bit");
