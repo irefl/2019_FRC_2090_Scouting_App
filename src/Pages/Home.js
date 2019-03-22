@@ -7,6 +7,8 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import BlueButton from '../Components/BlueButton';
 import MainPage from './MainPage/MainPage';
 import EnterInfo from './EnterInfo/EnterInfo';
+import Stats from './Stats/Stats';
+import AllStats from './AllStats/AllStats';
 
 const Home = ({ currentUser }) => {
     const [canSee, setCanSee] = useState(false)
@@ -39,6 +41,8 @@ const Home = ({ currentUser }) => {
                     <Switch>
                         <Route exact path="/" component={() => <MainPage currentUser={currentUser} />} />
                         <Route path="/enterinfo" component={() => <EnterInfo currentUser={currentUser} />} />
+                        <Route path="/stats/:team" component={() => <Stats currentUser={currentUser} />} />
+                        <Route path="/allstats" component={() => <AllStats currentUser={currentUser} />} />
                     </Switch>
                 </Router>
             </>

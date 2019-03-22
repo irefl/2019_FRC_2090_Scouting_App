@@ -8,7 +8,7 @@ const pages = [{
     link: "/enterinfo",
     name: "Enter match info"
 }, {
-    link: "/stats",
+    link: "/stats/0",
     name: "See statstics by team"
 }, {
     link: "/allstats",
