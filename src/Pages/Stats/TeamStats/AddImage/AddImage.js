@@ -32,7 +32,7 @@ const AddImage = ({ selectedTeam }) => {
                 await firebase.database().ref(`2019data/${selectedTeam}/images`).push({ src: url });
                 toast.success("Image upload success!");
             } catch (e) {
-                toast.error(`Error uploading image: ${e}`);
+                toast.error(`Error uploading image: ${e.message}`);
             }
         }}>Submit</BlueButton>
     </>

@@ -48,3 +48,15 @@ h2 {
 .recharts-wrapper{
     margin: auto !important;
 }
+
+a {
+    color: inherit !important; 
+    text-decoration: none!important;
+}
+
+a:hover 
+{
+    color:inherit!important;
+     text-decoration:none!important; 
+     cursor:pointer!important;  
+}
