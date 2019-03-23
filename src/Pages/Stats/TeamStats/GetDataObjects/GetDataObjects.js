@@ -5,9 +5,9 @@ import ScoringConfigurations from "../../../../Components/Constants/ScoringConfi
  * @param {Object} matches 
  */
 const hatchScores = (matches) => {
-    return matches.map(match => {
+    return matches.map((match, i) => {
         return {
-            match: match.matchNumber,
+            match: i + 1,
             score: countHatches(match.cargo) + countHatches(match.farRocket) + countHatches(match.nearRocket)
         };
     })

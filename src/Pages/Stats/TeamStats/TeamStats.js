@@ -49,15 +49,16 @@ const TeamStats = ({ teamData, selectedTeam }) => {
         <Spacer space={10} />
 
         {matchData.length > 0 ? <>
-            {/* See chart of hatch on rockets and cargo ship per match */}
-            <ShowHatchData {...{ matchData }} />
-            {/* See chart of cargo on rockets and cargo ship per match */}
-            {/* See chart of scoring hotspots on rockets (combined) */}
-            {/* See chart of preferred side to score on */}
-            {/* See all observations */}
-            {/* Scroll through all previous matches */}
+            <div style={{ margin: 'auto', textAlign: 'center' }}>
+                {/* See chart of hatch on rockets and cargo ship per match */}
+                <ShowHatchData {...{ matchData }} />
+                {/* See chart of cargo on rockets and cargo ship per match */}
+                {/* See chart of scoring hotspots on rockets (combined) */}
+                {/* See chart of preferred side to score on */}
+                {/* See all observations */}
+                {/* Scroll through all previous matches */}
 
-
+            </div>
         </> : <>There is no match data for this team.</>}
     </>
 }

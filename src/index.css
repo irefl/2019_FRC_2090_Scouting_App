@@ -44,3 +44,7 @@ h2 {
     width: 100% !important;
     max-width: 100% !important;
 }
+
+.recharts-wrapper{
+    margin: auto !important;
+}
