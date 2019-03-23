@@ -94,4 +94,68 @@ const allScores = (matches) => {
     })
 }
 
-export { cargo, nearRocket, farRocket, hatchScores, countHatches, cargoScores, countCargo, allScores }
+const farBays = ["bay1", "bay2", "bay3", "bay4"];
+const nearBays = ["bay5", "bay6", "bay7", "bay8"];
+
+const cargocomfortScores = (matches) => {
+    let nearLeft = [];
+    let farLeft = [];
+    let nearRight = [];
+    let farRight = [];
+
+    matches.forEach((match, i) => {
+        if (match.side === "LEFT") {
+            farLeft.push({
+                match: i + 1,
+                score: getScoreOfCertainCargoSpots(match.cargo, farBays)
+            });
+            nearLeft.push({
+                match: i + 1,
+                score: getScoreOfCertainCargoSpots(match.cargo, nearBays)
+            });
+        }
+
+        if (match.side === "RIGHT") {
+            farRight.push({
+                match: i + 1,
+                score: getScoreOfCertainCargoSpots(match.cargo, farBays)
+            });
+            nearRight.push({
+                match: i + 1,
+                score: getScoreOfCertainCargoSpots(match.cargo, nearBays)
+            });
+        }
+    })
+
+    return {
+        nearLeft,
+        farLeft,
+        nearRight,
+        farRight
+    }
+}
+
+// bays is an array of strings in the format "bay#"
+const getScoreOfCertainCargoSpots = (cargo, bays) => {
+    let score = 0;
+    bays.forEach(bay => {
+        let scored = cargo[bay];
+        switch (scored) {
+            case ScoringConfigurations.CARGO:
+                score += 3;
+                break;
+            case ScoringConfigurations.HATCH:
+                score += 2;
+                break;
+            case ScoringConfigurations.CARGO_AND_HATCH:
+                score += 5;
+                break;
+            default:
+                score += 0;
+                break;
+        }
+    });
+    return score;
+}
+
+export { cargocomfortScores, cargo, nearRocket, farRocket, hatchScores, countHatches, cargoScores, countCargo, allScores }
