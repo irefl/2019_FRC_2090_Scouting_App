@@ -6,14 +6,19 @@ const Observations = ({ matchData }) => {
         <Grid>
             <Row>
                 {matchData.map((match, i) => {
-                    return <Col>
+                    return <Col md={3} key={"obs" + i}>
                         <div style={{
                             margin: 10,
                             backgroundColor: '#efefef',
                             border: "2px solid #20508B",
                             borderRadius: 4,
-                            padding: 5
+                            padding: 5,
+                            textAlign: 'left'
                         }}>
+                            <div style={{
+                                color: "#20508B",
+                                fontWeight: 'bold'
+                            }}>Match {match.matchNumber}</div>
                             <span style={{
                                 fontWeight: 'bold'
                             }}>{match.whoAdded}: </span>

@@ -207,7 +207,7 @@ const EnterInfo = ({ currentUser }) => {
         <h2>Review and submit</h2>
         {selectedTeam !== 0 && <p style={{ fontSize: 30, fontWeight: 'bold' }}>Team {selectedTeam} - {TeamsMapping[selectedTeam]} has scored <span style={{ color: "#990000" }}>{score}</span> points</p>}
         {selectedTeam === 0 && <p>Please select a team</p>}
-        <div><Label check><Input type="checkbox" value={doubleChecked} onChange={() => {
+        <div><Label check><Input type="checkbox" checked={doubleChecked} onChange={() => {
             setDoubleChecked(!doubleChecked);
         }} />{' '}Double checked
         </Label></div>

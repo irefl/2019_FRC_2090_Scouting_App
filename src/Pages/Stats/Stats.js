@@ -38,7 +38,7 @@ const Stats = ({ currentUser }) => {
 
         <TeamPicker {...{ selectedTeam, setSelectedTeam }} />
         <Spacer space={10} />
-        <TeamStats {...{ teamData: data[selectedTeam], selectedTeam }} />
+        <TeamStats {...{ teamData: data ? data[selectedTeam] : {}, selectedTeam }} />
 
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>
