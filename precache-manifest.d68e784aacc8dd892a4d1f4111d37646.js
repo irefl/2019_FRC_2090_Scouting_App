@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "5f7375bfff5bb777f95c",
-    "url": "/2019_FRC_2090_Scouting_App/static/css/main.18bf2056.chunk.css"
+    "revision": "5aa27973bcd138736191",
+    "url": "/2019_FRC_2090_Scouting_App/static/css/main.aca2fdb5.chunk.css"
   },
   {
-    "revision": "5f7375bfff5bb777f95c",
-    "url": "/2019_FRC_2090_Scouting_App/static/js/main.5cd54510.chunk.js"
+    "revision": "5aa27973bcd138736191",
+    "url": "/2019_FRC_2090_Scouting_App/static/js/main.468e18d6.chunk.js"
   },
   {
     "revision": "3de3d3191ae6721691a7",
@@ -28,6 +28,10 @@ self.__precacheManifest = [
     "url": "/2019_FRC_2090_Scouting_App/static/media/Quicksand-Medium.0c642332.ttf"
   },
   {
+    "revision": "c5f954788f341b22e1974433bb972ac1",
+    "url": "/2019_FRC_2090_Scouting_App/static/media/Quicksand-Light.c5f95478.ttf"
+  },
+  {
     "revision": "f87b9b4f34bdbf75b5c0cf3a5a137508",
     "url": "/2019_FRC_2090_Scouting_App/static/media/Quicksand-Regular.f87b9b4f.ttf"
   },
@@ -36,11 +40,7 @@ self.__precacheManifest = [
     "url": "/2019_FRC_2090_Scouting_App/static/media/Quicksand-Bold.0c044626.ttf"
   },
   {
-    "revision": "c5f954788f341b22e1974433bb972ac1",
-    "url": "/2019_FRC_2090_Scouting_App/static/media/Quicksand-Light.c5f95478.ttf"
-  },
-  {
-    "revision": "fd5374027f22a0909c9b27304b8fd980",
+    "revision": "371175d48ddcc45339c941b357a162e5",
     "url": "/2019_FRC_2090_Scouting_App/index.html"
   }
 ];
