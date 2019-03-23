@@ -2,6 +2,7 @@ import React from 'react';
 import { UncontrolledCarousel } from 'reactstrap';
 import AddImage from './AddImage/AddImage';
 import Spacer from '../../../Components/Spacer';
+import ShowHatchData from './ShowHatchData/ShowHatchData';
 
 const TeamStats = ({ teamData, selectedTeam }) => {
     if (selectedTeam === 0) {
@@ -9,10 +10,13 @@ const TeamStats = ({ teamData, selectedTeam }) => {
     }
 
     let items;
+    let matchData;
     if (teamData) {
         items = teamData.images || {};
+        matchData = teamData.match_data || {};
     } else {
         items = {};
+        matchData = {};
     }
 
     let areImages = false;
@@ -22,6 +26,17 @@ const TeamStats = ({ teamData, selectedTeam }) => {
         });
         areImages = true;
     }
+
+    matchData = Object.keys(matchData).map(match => {
+        return {
+            matchNumber: Number(match),
+            ...matchData[match]
+        };
+    })
+
+    matchData = matchData.sort((a, b) => {
+        return a.matchNumber < b.matchNumber;
+    })
     return <>
         <h2>Viewing data about Team {selectedTeam}</h2>
 
@@ -33,8 +48,9 @@ const TeamStats = ({ teamData, selectedTeam }) => {
         <div><AddImage {...{ selectedTeam }} /></div>
         <Spacer space={10} />
 
-        {teamData && teamData.match_data ? <>
+        {matchData.length > 0 ? <>
             {/* See chart of hatch on rockets and cargo ship per match */}
+            <ShowHatchData {...{ matchData }} />
             {/* See chart of cargo on rockets and cargo ship per match */}
             {/* See chart of scoring hotspots on rockets (combined) */}
             {/* See chart of preferred side to score on */}
