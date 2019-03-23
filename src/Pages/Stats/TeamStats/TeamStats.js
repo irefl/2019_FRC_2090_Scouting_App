@@ -33,6 +33,16 @@ const TeamStats = ({ teamData, selectedTeam }) => {
         <div><AddImage {...{ selectedTeam }} /></div>
         <Spacer space={10} />
 
+        {teamData && teamData.match_data ? <>
+            {/* See chart of hatch on rockets and cargo ship per match */}
+            {/* See chart of cargo on rockets and cargo ship per match */}
+            {/* See chart of scoring hotspots on rockets (combined) */}
+            {/* See chart of preferred side to score on */}
+            {/* See all observations */}
+            {/* Scroll through all previous matches */}
+
+
+        </> : <>There is no match data for this team.</>}
     </>
 }
 
