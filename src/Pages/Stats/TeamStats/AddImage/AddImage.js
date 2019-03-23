@@ -8,7 +8,7 @@ import 'firebase/database';
 import 'firebase/storage';
 import { toast } from 'react-toastify';
 
-const AddImage = ({ selectedTeam, imageCount }) => {
+const AddImage = ({ selectedTeam }) => {
     const [image, setImage] = useState(null);
     return <>
         <h4>Add an image</h4>
@@ -32,11 +32,8 @@ const AddImage = ({ selectedTeam, imageCount }) => {
                 await firebase.database().ref(`2019data/${selectedTeam}/images`).push({ src: url });
                 toast.success("Image upload success!");
             } catch (e) {
-                toast.error(`Error uploading image: ${e}`)
+                toast.error(`Error uploading image: ${e}`);
             }
-
-
-            // 
         }}>Submit</BlueButton>
     </>
 }

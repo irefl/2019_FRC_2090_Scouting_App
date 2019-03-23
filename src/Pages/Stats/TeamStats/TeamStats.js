@@ -1,6 +1,7 @@
 import React from 'react';
 import { UncontrolledCarousel } from 'reactstrap';
 import AddImage from './AddImage/AddImage';
+import Spacer from '../../../Components/Spacer';
 
 const TeamStats = ({ teamData, selectedTeam }) => {
     if (selectedTeam === 0) {
@@ -29,7 +30,8 @@ const TeamStats = ({ teamData, selectedTeam }) => {
             <UncontrolledCarousel items={items} autoPlay={false} interval={false} />
         </div> : <div>There are no pictures for this team</div>}
 
-        <div><AddImage {...{ selectedTeam, imageCount: items.length }} /></div>
+        <div><AddImage {...{ selectedTeam }} /></div>
+        <Spacer space={10} />
 
     </>
 }
