@@ -32,6 +32,8 @@ const Stats = ({ currentUser }) => {
     }
 
     return <>
+        <Link to="/"><BlueButton>Back</BlueButton></Link>
+        <hr />
         <h1>View team stats</h1>
 
         <TeamPicker {...{ selectedTeam, setSelectedTeam }} />

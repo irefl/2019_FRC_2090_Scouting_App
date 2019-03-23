@@ -150,6 +150,8 @@ const EnterInfo = ({ currentUser }) => {
 
     let score = calculateScore({ selectedAuton, nearRocket, farRocket, cargo, habBonus });
     return <>
+        <Link to="/"><BlueButton>Back</BlueButton></Link>
+        <hr />
         <h1>Enter match information</h1>
 
         <h2>General info</h2>

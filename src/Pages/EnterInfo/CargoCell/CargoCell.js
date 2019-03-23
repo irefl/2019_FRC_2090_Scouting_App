@@ -27,7 +27,7 @@ const setCell = (rocket, setRocket, cellName) => {
     setRocket(newRocket);
 }
 
-const CargoCell = ({ name, value, rocket, setRocket }) => {
+const CargoCell = ({ name, value, rocket, setRocket, cantChange }) => {
     return <>
         <div style={{
             width: 51,
@@ -37,7 +37,9 @@ const CargoCell = ({ name, value, rocket, setRocket }) => {
             cursor: "pointer",
             userSelect: "none"
         }} onClick={() => {
-            setCell(rocket, setRocket, name);
+            if (!cantChange) {
+                setCell(rocket, setRocket, name);
+            }
         }} >
             {value === NONE &&
                 <None />}
