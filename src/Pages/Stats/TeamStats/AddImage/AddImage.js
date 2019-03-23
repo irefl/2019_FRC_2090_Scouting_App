@@ -13,11 +13,29 @@ const AddImage = ({ selectedTeam, imageCount }) => {
     return <>
         <h4>Add an image</h4>
         <Input type="file" onChange={(e) => {
-            setImage(e.target.files[0]);
+            setImage({
+                name: e.target.files[0].name,
+                file: e.target.files[0]
+            });
         }} />
         <Spacer space={10} />
         <BlueButton disabled={image ? false : true} onClick={async () => {
-            // Generate random hash
+            if (!image) {
+                toast.error("No/invalid image provided");
+                return;
+            }
+            try {
+                toast.info("Uploading image...");
+                const hash = crypto.randomBytes(32).toString("hex");
+                const uploadSnap = await firebase.storage().ref(`imgs/${hash}/${image.name}`).put(image.file);
+                const url = await uploadSnap.ref.getDownloadURL();
+                await firebase.database().ref(`2019data/${selectedTeam}/images`).push({ src: url });
+                toast.success("Image upload success!");
+            } catch (e) {
+                toast.error(`Error uploading image: ${e}`)
+            }
+
+
             // 
         }}>Submit</BlueButton>
     </>

@@ -9,22 +9,24 @@ const TeamStats = ({ teamData, selectedTeam }) => {
 
     let items;
     if (teamData) {
-        items = teamData.images || [];
+        items = teamData.images || {};
     } else {
-        items = [];
+        items = {};
     }
 
-    if (items.length > 0) {
-        items = items.map(item => {
-            return { ...item, caption: '', header: '' }
+    let areImages = false;
+    if (Object.keys(items).length > 0) {
+        items = Object.keys(items).map(item => {
+            return { ...items[item], caption: '', header: '' }
         });
+        areImages = true;
     }
     return <>
         <h2>Viewing data about Team {selectedTeam}</h2>
 
         <h3>Pictures</h3>
-        {items.length > 0 ? <div className="carouselOut" style={{ width: window.innerWidth < 700 ? '100%' : '50%', margin: 'auto' }}>
-            <UncontrolledCarousel items={items} autoplay={false} />
+        {areImages ? <div className="carouselOut" style={{ width: window.innerWidth < 700 ? '100%' : '50%', margin: 'auto' }}>
+            <UncontrolledCarousel items={items} autoPlay={false} interval={false} />
         </div> : <div>There are no pictures for this team</div>}
 
         <div><AddImage {...{ selectedTeam, imageCount: items.length }} /></div>
