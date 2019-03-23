@@ -12,7 +12,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import CargoShip from './CargoShip/CargoShip';
 import HabPlatformsImage from '../../Assets/Images/HabPlatforms.png';
 import HabLevelPicker from './HabLevelPicker/HabLevelPicker';
-import { Input } from 'reactstrap';
+import { Input, Label } from 'reactstrap';
 import HabLevels from '../../Components/Constants/HabLevels';
 import { TeamsMapping } from '../../Assets/Teams/Teams';
 import { toast } from 'react-toastify';
@@ -54,6 +54,7 @@ const checkValidity = ({
     side,
     selectedAuton,
     habBonus,
+    doubleChecked
 }) => {
     if (selectedTeam === 0) {
         toast.error("You haven't selected a team!");
@@ -69,6 +70,9 @@ const checkValidity = ({
         return false;
     } else if (habBonus === "") {
         toast.error("You haven't provided the habitat bonus info!");
+        return false;
+    } else if (!doubleChecked) {
+        toast.error("Please double check before submitting!");
         return false;
     }
     return true;
@@ -145,8 +149,9 @@ const EnterInfo = ({ currentUser }) => {
         bay7: NONE,
         bay8: NONE,
     });
-    const [habBonus, setHabBonus] = useState("")
-    const [observations, setObservations] = useState("")
+    const [habBonus, setHabBonus] = useState("");
+    const [observations, setObservations] = useState("");
+    const [doubleChecked, setDoubleChecked] = useState(false);
 
     let score = calculateScore({ selectedAuton, nearRocket, farRocket, cargo, habBonus });
     return <>
@@ -202,6 +207,11 @@ const EnterInfo = ({ currentUser }) => {
         <h2>Review and submit</h2>
         {selectedTeam !== 0 && <p style={{ fontSize: 30, fontWeight: 'bold' }}>Team {selectedTeam} - {TeamsMapping[selectedTeam]} has scored <span style={{ color: "#990000" }}>{score}</span> points</p>}
         {selectedTeam === 0 && <p>Please select a team</p>}
+        <div><Label check><Input type="checkbox" value={doubleChecked} onChange={() => {
+            setDoubleChecked(!doubleChecked);
+        }} />{' '}Double checked
+        </Label></div>
+
         <BlueButton onClick={async () => {
             let valid = checkValidity({
                 selectedTeam,
@@ -209,6 +219,7 @@ const EnterInfo = ({ currentUser }) => {
                 side,
                 selectedAuton,
                 habBonus,
+                doubleChecked
             });
             if (valid) {
                 toast.info("Submitting data...");
@@ -231,7 +242,7 @@ const EnterInfo = ({ currentUser }) => {
                     habBonus,
                     observations,
                     score,
-                    whoAdded: currentUser.email
+                    whoAdded: currentUser.displayName || currentUser.email
                 });
 
                 // check if uploaded
@@ -274,6 +285,7 @@ const EnterInfo = ({ currentUser }) => {
                 });
                 setHabBonus("");
                 setObservations("");
+                setDoubleChecked(false);
             }
         }}>Submit</BlueButton>
         <hr />

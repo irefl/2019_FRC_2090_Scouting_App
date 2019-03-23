@@ -11,6 +11,7 @@ import CargoComfort from './CargoComfort/CargoComfort';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import ShowClimbs from './ShowClimbs/ShowClimbs';
 import AutoPerformance from './AutoPerformance/AutoPerformance';
+import Observations from './Observations/Observations';
 
 const TeamStats = ({ teamData, selectedTeam }) => {
     if (selectedTeam === 0) {
@@ -96,15 +97,9 @@ const TeamStats = ({ teamData, selectedTeam }) => {
                         </Col>
                     </Row>
                 </Grid>
-
-
-
-
-                {/* Average score in each bay */}
-                {/* Average score in each rocket cell */}
-
-                {/* See chart of preferred side to score on */}
-                {/* See all observations */}
+                <hr />
+                <h2>Observations</h2>
+                <Observations {...{ matchData }} />
                 {/* Scroll through all previous matches */}
             </div>
         </> : <>There is no match data for this team.</>}
