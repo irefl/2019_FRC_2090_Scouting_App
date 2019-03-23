@@ -5,7 +5,7 @@ import MatchScoreChart from '../Charts/MatchScoreChart/MatchScoreChart';
 const ShowHatchData = ({ matchData }) => {
     let data = hatchScores(matchData);
     return <>
-        <h3>Total Hatches Scored Per Match</h3>
+        <h3>Total Hatches Scored Per Match (in any goal)</h3>
         <MatchScoreChart data={data} />
     </>
 }
