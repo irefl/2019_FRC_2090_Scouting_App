@@ -167,4 +167,36 @@ const calculateClimb = (matches) => {
     });
 }
 
-export { calculateClimb, cargocomfortScores, cargo, nearRocket, farRocket, hatchScores, countHatches, cargoScores, countCargo, allScores }
+const calculateAuto = (matches) => {
+    return matches.map((match, i) => {
+        return {
+            match: i + 1,
+            score: calculateAutonLevel(match.selectedAuton)
+        }
+    })
+}
+
+const calculateAutonLevel = (value) => {
+    switch (value) {
+        case 2:
+            return 1;
+        case 3:
+            return 2;
+        default:
+            return 0;
+    }
+}
+
+export {
+    calculateAuto,
+    calculateClimb,
+    cargocomfortScores,
+    cargo,
+    nearRocket,
+    farRocket,
+    hatchScores,
+    countHatches,
+    cargoScores,
+    countCargo,
+    allScores
+}

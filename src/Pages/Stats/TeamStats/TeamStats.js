@@ -10,6 +10,7 @@ import ShowFarRocketScoring from './ShowFarRocketScoring/ShowFarRocketScoring';
 import CargoComfort from './CargoComfort/CargoComfort';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import ShowClimbs from './ShowClimbs/ShowClimbs';
+import AutoPerformance from './AutoPerformance/AutoPerformance';
 
 const TeamStats = ({ teamData, selectedTeam }) => {
     if (selectedTeam === 0) {
@@ -82,9 +83,22 @@ const TeamStats = ({ teamData, selectedTeam }) => {
                 <CargoComfort {...{ matchData }} />
                 <hr />
 
-                {/* Climbing levels */}
-                <h2>Climb level for each match (are they consistent?)</h2>
-                <ShowClimbs {...{ matchData }} />
+                <Grid>
+                    <Row>
+                        <Col md={6}>
+                            {/* Climbing levels */}
+                            <h2>Climb level for each match (are they consistent?)</h2>
+                            <ShowClimbs {...{ matchData }} />
+                        </Col>
+                        <Col md={6}>
+                            <h2>Autonomous performance</h2>
+                            <AutoPerformance {...{ matchData }} />
+                        </Col>
+                    </Row>
+                </Grid>
+
+
+
 
                 {/* Average score in each bay */}
                 {/* Average score in each rocket cell */}
