@@ -158,4 +158,13 @@ const getScoreOfCertainCargoSpots = (cargo, bays) => {
     return score;
 }
 
-export { cargocomfortScores, cargo, nearRocket, farRocket, hatchScores, countHatches, cargoScores, countCargo, allScores }
+const calculateClimb = (matches) => {
+    return matches.map((match, i) => {
+        return {
+            match: i + 1,
+            score: match.habBonus
+        }
+    });
+}
+
+export { calculateClimb, cargocomfortScores, cargo, nearRocket, farRocket, hatchScores, countHatches, cargoScores, countCargo, allScores }

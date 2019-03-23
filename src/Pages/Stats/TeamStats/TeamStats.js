@@ -9,6 +9,7 @@ import ShowNearRocketScoring from './ShowNearRocketScoring/ShowNearRocketScoring
 import ShowFarRocketScoring from './ShowFarRocketScoring/ShowFarRocketScoring';
 import CargoComfort from './CargoComfort/CargoComfort';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import ShowClimbs from './ShowClimbs/ShowClimbs';
 
 const TeamStats = ({ teamData, selectedTeam }) => {
     if (selectedTeam === 0) {
@@ -79,6 +80,14 @@ const TeamStats = ({ teamData, selectedTeam }) => {
                 <hr />
                 <h2>Cargo ship scores (which side is the team comfortable with?)</h2>
                 <CargoComfort {...{ matchData }} />
+                <hr />
+
+                {/* Climbing levels */}
+                <h2>Climb level for each match (are they consistent?)</h2>
+                <ShowClimbs {...{ matchData }} />
+
+                {/* Average score in each bay */}
+                {/* Average score in each rocket cell */}
 
                 {/* See chart of preferred side to score on */}
                 {/* See all observations */}
