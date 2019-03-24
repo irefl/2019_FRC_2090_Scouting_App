@@ -37,7 +37,12 @@ const SubmissionCount = ({ matchNumber }) => {
     teams = teams.sort();
 
     return <>
-        There have been {count}/6 submissions for this match so far: {teams.join(", ")}
+        <div>
+            There have been {count}/6 submissions for this match so far
+        </div>
+        <div>
+            <span style={{ fontWeight: 'bold', color: '#20508B' }}>Teams submitted:</span> {teams.join(", ")}
+        </div>
     </>
 }
 
