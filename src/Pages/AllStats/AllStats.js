@@ -6,9 +6,10 @@ import 'firebase/database';
 import LoadingSpinner from '../../Components/LoadingSpinner';
 import { TeamsInit } from '../../Assets/Teams/Teams';
 import TeamSelector from './TeamSelector/TeamSelector';
+import DataCalculator from './DataCalculator/DataCalculator';
 
 const AllStats = ({ currentUser }) => {
-    const [data, setData] = useState(null);
+    const [info, setCalculatedInfo] = useState({});
     const [loading, setLoading] = useState(true);
     const [teamsToInclude, setTeamsToInclude] = useState(TeamsInit);
 
@@ -16,9 +17,11 @@ const AllStats = ({ currentUser }) => {
         const dataRef = firebase.database().ref("2019data");
         dataRef.on('value', (snap) => {
             let value = snap.val() || null;
-            setData(value);
+            let calculatedInfo = DataCalculator(value)
+            setCalculatedInfo(calculatedInfo);
             setLoading(false);
         });
+
 
         return () => { dataRef.off(); }
     }, [])
@@ -37,6 +40,9 @@ const AllStats = ({ currentUser }) => {
 
         <h2>Click on a team to hide them</h2>
         <TeamSelector {...{ teamsToInclude, setTeamsToInclude }} />
+
+        {info && info.cargoScores && <></>}
+
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>
     </>
