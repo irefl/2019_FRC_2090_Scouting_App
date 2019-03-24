@@ -20,6 +20,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import Spacer from '../../Components/Spacer';
 import CargoAndHatchesDropped from './CargoAndHatchesDropped/CargoAndHatchesDropped';
+import SubmissionCount from './SubmissionCount/SubmissionCount';
 
 const { NONE, CARGO, CARGO_AND_HATCH, HATCH } = ScoringConfigurations;
 
@@ -167,7 +168,18 @@ const EnterInfo = ({ currentUser }) => {
         <TeamPicker {...{ selectedTeam, setSelectedTeam }} />
         <Spacer space={10} />
         {/** Match number */}
-        <MatchNumberInput {...{ matchNumber, setMatchNumber }} />
+        <Grid>
+            <Row>
+                <Col md={6}>
+                    <MatchNumberInput {...{ matchNumber, setMatchNumber }} />
+                </Col>
+                <Col md={6}>
+                    {matchNumber > 0 && <>
+                        <SubmissionCount matchNumber={matchNumber} />
+                    </>}
+                </Col>
+            </Row>
+        </Grid>
         <Spacer space={10} />
         <h4>What side is the team on?</h4>
         <SidePicker {...{ side, setSide }} />
