@@ -121,4 +121,42 @@ const TeamsInit = {
     7898: true
 }
 
-export { Teams, TeamsMapping, TeamsInit }
+const TeamsInitF = {
+    359: false,
+    368: false,
+    2090: false,
+    2437: false,
+    2438: false,
+    2439: false,
+    2441: false,
+    2443: false,
+    2444: false,
+    2445: false,
+    2465: false,
+    2477: false,
+    2504: false,
+    2853: false,
+    2896: false,
+    3008: false,
+    3721: false,
+    3800: false,
+    3878: false,
+    3882: false,
+    4253: false,
+    4270: false,
+    5515: false,
+    5701: false,
+    6704: false,
+    6766: false,
+    6909: false,
+    6998: false,
+    7497: false,
+    7505: false,
+    7548: false,
+    7550: false,
+    7631: false,
+    7724: false,
+    7898: false
+}
+
+export { Teams, TeamsMapping, TeamsInit, TeamsInitF }

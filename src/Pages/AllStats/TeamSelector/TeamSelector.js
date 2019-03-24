@@ -1,10 +1,19 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import { Teams } from '../../../Assets/Teams/Teams';
+import { Teams, TeamsInit, TeamsInitF } from '../../../Assets/Teams/Teams';
+import BlueButton from '../../../Components/BlueButton';
 
 const TeamSelector = ({ teamsToInclude, setTeamsToInclude }) => {
     return <>
         <Grid>
+            <Row>
+                <Col><BlueButton style={{ margin: 10 }} onClick={() => {
+                    setTeamsToInclude(TeamsInit);
+                }}>Select all</BlueButton></Col>
+                <Col><BlueButton style={{ margin: 10 }} onClick={() => {
+                    setTeamsToInclude(TeamsInitF);
+                }}>Deselect all</BlueButton></Col>
+            </Row>
             <Row>
                 {Teams.map(team => {
                     return <Col xs={3} md={3} lg={1} key={team}>
