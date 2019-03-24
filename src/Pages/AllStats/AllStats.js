@@ -7,6 +7,7 @@ import LoadingSpinner from '../../Components/LoadingSpinner';
 import { TeamsInit } from '../../Assets/Teams/Teams';
 import TeamSelector from './TeamSelector/TeamSelector';
 import DataCalculator from './DataCalculator/DataCalculator';
+import CargoScores from './CargoScores/CargoScores';
 
 const AllStats = ({ currentUser }) => {
     const [info, setCalculatedInfo] = useState({});
@@ -33,6 +34,14 @@ const AllStats = ({ currentUser }) => {
         </>
     }
 
+    let teamsArr = [];
+    Object.keys(teamsToInclude).forEach(team => {
+        if (teamsToInclude[team]) {
+            teamsArr.push(team);
+        }
+    });
+    teamsArr = teamsArr.map(d => Number(d));
+    teamsArr.sort();
     return <>
         <Link to="/"><BlueButton>Back</BlueButton></Link>
         <hr />
@@ -41,7 +50,9 @@ const AllStats = ({ currentUser }) => {
         <h2>Click on a team to hide them</h2>
         <TeamSelector {...{ teamsToInclude, setTeamsToInclude }} />
 
-        {info && info.cargoScores && <></>}
+        {info && info.cargoScores && <>
+            <CargoScores cargoScores={info.cargoScores} teamsArr={teamsArr} />
+        </>}
 
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>
