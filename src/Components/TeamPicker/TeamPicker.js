@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 import { Teams, TeamsMapping } from '../../Assets/Teams/Teams';
 
-const TeamPicker = ({ selectedTeam, setSelectedTeam }) => {
+const TeamPicker = ({ allData, selectedTeam, setSelectedTeam }) => {
     const [dropOpen, setDropOpen] = useState(false);
 
     return <Dropdown isOpen={dropOpen} toggle={() => setDropOpen(!dropOpen)} >
@@ -28,7 +28,13 @@ const TeamPicker = ({ selectedTeam, setSelectedTeam }) => {
             },
         }}>
             {Teams.map(team => {
-                return <DropdownItem key={team} onClick={() => { setSelectedTeam(team) }}>{team} - {TeamsMapping[team]}</DropdownItem>
+                let numEntries = 0;
+                if (allData && allData[team] && allData[team].match_data) {
+                    numEntries = Object.keys(allData[team].match_data).length;
+                }
+                return <DropdownItem key={team} onClick={() => { setSelectedTeam(team) }}>
+                    {team} - {TeamsMapping[team]} {allData && <>- ({numEntries})</>}
+                </DropdownItem>
             })}
         </DropdownMenu>
     </Dropdown>

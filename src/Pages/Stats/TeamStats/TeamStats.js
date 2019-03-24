@@ -12,6 +12,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import ShowClimbs from './ShowClimbs/ShowClimbs';
 import AutoPerformance from './AutoPerformance/AutoPerformance';
 import Observations from './Observations/Observations';
+import DropCounts from './DropCounts/DropCounts';
 
 const TeamStats = ({ teamData, selectedTeam }) => {
     if (selectedTeam === 0) {
@@ -79,6 +80,9 @@ const TeamStats = ({ teamData, selectedTeam }) => {
                         </Col>
                     </Row>
                 </Grid>
+                <hr />
+                <h2>Cargo vs Hatch drop count (how well are they at handling them?)</h2>
+                <DropCounts {...{ matchData }} />
                 <hr />
                 <h2>Cargo ship scores (which side is the team comfortable with?)</h2>
                 <CargoComfort {...{ matchData }} />

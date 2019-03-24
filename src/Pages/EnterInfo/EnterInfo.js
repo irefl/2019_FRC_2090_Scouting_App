@@ -202,11 +202,19 @@ const EnterInfo = ({ currentUser }) => {
         <HabLevelPicker {...{ habBonus, setHabBonus }} />
         <Spacer space={10} />
 
-        <h3>Cargo dropped</h3>
-        <CargoAndHatchesDropped value={cargoDropped} setValue={setCargoDropped} />
+        <Grid>
+            <Row>
+                <Col md={6}>
+                    <h3>Cargo dropped</h3>
+                    <CargoAndHatchesDropped value={cargoDropped} setValue={setCargoDropped} />
+                </Col>
+                <Col md={6}>
+                    <h3>Hatches dropped</h3>
+                    <CargoAndHatchesDropped value={hatchesDropped} setValue={setHatchesDropped} />
+                </Col>
+            </Row>
+        </Grid>
 
-        <h3>Hatches dropped</h3>
-        <CargoAndHatchesDropped value={hatchesDropped} setValue={setHatchesDropped} />
 
         <h2>Notes and observations (optional)</h2>
         <Input type="textarea" value={observations} onChange={(e) => {

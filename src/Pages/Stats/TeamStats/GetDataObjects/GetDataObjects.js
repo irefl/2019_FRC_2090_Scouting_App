@@ -187,6 +187,27 @@ const calculateAutonLevel = (value) => {
     }
 }
 
+const dropScores = (matches) => {
+    let cargoDropped = [];
+    let hatchesDropped = [];
+    // cargoDropped
+
+    matches.forEach((match, i) => {
+        cargoDropped.push({
+            match: i + 1,
+            score: match.cargoDropped
+        });
+        hatchesDropped.push({
+            match: i + 1,
+            score: match.hatchesDropped
+        });
+    })
+
+    return {
+        cargoDropped, hatchesDropped
+    }
+}
+
 export {
     calculateAuto,
     calculateClimb,
@@ -198,5 +219,6 @@ export {
     countHatches,
     cargoScores,
     countCargo,
-    allScores
+    allScores,
+    dropScores
 }
