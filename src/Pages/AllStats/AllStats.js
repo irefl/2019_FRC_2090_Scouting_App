@@ -46,21 +46,31 @@ const AllStats = ({ currentUser }) => {
 
     // Convert to objects used in the bar charts
     let avgCargoScoreData = [];
+    let currHighestCargoAvg = ["Nobody", 0];
     let avgHatchScoreData = [];
+    let currHighestHatchAvg = ["Nobody", 0];
 
     teamsArr.forEach(team => {
-        if (info.cargoScores[team]) {
+        let cargoScoreCurr = info.cargoScores[team];
+        let hatchScoreCurr = info.hatchScores[team];
+        if (cargoScoreCurr) {
             avgCargoScoreData.push({
                 name: team,
-                count: info.cargoScores[team]
+                count: cargoScoreCurr
             });
+            if (cargoScoreCurr > currHighestCargoAvg[1]) {
+                currHighestCargoAvg = [team, cargoScoreCurr];
+            }
         }
 
-        if (info.hatchScores[team]) {
+        if (hatchScoreCurr) {
             avgHatchScoreData.push({
                 name: team,
-                count: info.hatchScores[team]
+                count: hatchScoreCurr
             });
+            if (hatchScoreCurr > currHighestHatchAvg[1]) {
+                currHighestHatchAvg = [team, hatchScoreCurr];
+            }
         }
     })
 
@@ -73,12 +83,18 @@ const AllStats = ({ currentUser }) => {
         <TeamSelector {...{ teamsToInclude, setTeamsToInclude }} />
 
         {info && info.cargoScores && <>
-            <h2 style={{ textAlign: 'center' }}>Average cargo scores</h2>
+            <div style={{ textAlign: 'center' }}>
+                <h2>Average cargo scores</h2>
+                <h3>Higher is better (current highest: {currHighestCargoAvg[0]})</h3>
+            </div>
             <GeneralBarChart data={avgCargoScoreData} dataKey={"count"} />
         </>}
 
         {info && info.hatchScores && <>
-            <h2 style={{ textAlign: 'center' }}>Average hatch scores</h2>
+            <div style={{ textAlign: 'center' }}>
+                <h2 style={{ textAlign: 'center' }}>Average hatch scores</h2>
+                <h3>Higher is better (current highest: {currHighestHatchAvg[0]})</h3>
+            </div>
             <GeneralBarChart data={avgHatchScoreData} dataKey={"count"} />
         </>}
 
