@@ -7,7 +7,7 @@ import LoadingSpinner from '../../Components/LoadingSpinner';
 import { TeamsInit } from '../../Assets/Teams/Teams';
 import TeamSelector from './TeamSelector/TeamSelector';
 import DataCalculator from './DataCalculator/DataCalculator';
-import CargoScores from './CargoScores/CargoScores';
+import GeneralBarChart from './GeneralBarChart/GeneralBarChart';
 
 const AllStats = ({ currentUser }) => {
     const [info, setCalculatedInfo] = useState({});
@@ -34,6 +34,7 @@ const AllStats = ({ currentUser }) => {
         </>
     }
 
+    // Get the teams to show
     let teamsArr = [];
     Object.keys(teamsToInclude).forEach(team => {
         if (teamsToInclude[team]) {
@@ -42,6 +43,27 @@ const AllStats = ({ currentUser }) => {
     });
     teamsArr = teamsArr.map(d => Number(d));
     teamsArr = teamsArr.sort((a, b) => a - b);
+
+    // Convert to objects used in the bar charts
+    let avgCargoScoreData = [];
+    let avgHatchScoreData = [];
+
+    teamsArr.forEach(team => {
+        if (info.cargoScores[team]) {
+            avgCargoScoreData.push({
+                name: team,
+                count: info.cargoScores[team]
+            });
+        }
+
+        if (info.hatchScores[team]) {
+            avgHatchScoreData.push({
+                name: team,
+                count: info.hatchScores[team]
+            });
+        }
+    })
+
     return <>
         <Link to="/"><BlueButton>Back</BlueButton></Link>
         <hr />
@@ -51,7 +73,13 @@ const AllStats = ({ currentUser }) => {
         <TeamSelector {...{ teamsToInclude, setTeamsToInclude }} />
 
         {info && info.cargoScores && <>
-            <CargoScores cargoScores={info.cargoScores} teamsArr={teamsArr} />
+            <h2 style={{ textAlign: 'center' }}>Average cargo scores</h2>
+            <GeneralBarChart data={avgCargoScoreData} dataKey={"count"} />
+        </>}
+
+        {info && info.hatchScores && <>
+            <h2 style={{ textAlign: 'center' }}>Average hatch scores</h2>
+            <GeneralBarChart data={avgHatchScoreData} dataKey={"count"} />
         </>}
 
         <hr />
