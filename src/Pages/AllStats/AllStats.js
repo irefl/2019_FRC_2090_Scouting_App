@@ -41,7 +41,7 @@ const AllStats = ({ currentUser }) => {
         }
     });
     teamsArr = teamsArr.map(d => Number(d));
-    teamsArr.sort();
+    teamsArr = teamsArr.sort((a, b) => a - b);
     return <>
         <Link to="/"><BlueButton>Back</BlueButton></Link>
         <hr />

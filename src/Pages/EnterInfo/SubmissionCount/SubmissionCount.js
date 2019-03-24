@@ -34,7 +34,7 @@ const SubmissionCount = ({ matchNumber }) => {
     });
 
     teams = teams.map(d => Number(d));
-    teams = teams.sort();
+    teams = teams.sort((a, b) => a - b);
 
     return <>
         <div>

@@ -56,7 +56,9 @@ const checkValidity = ({
     side,
     selectedAuton,
     habBonus,
-    doubleChecked
+    doubleChecked,
+    cargoDropped,
+    hatchesDropped
 }) => {
     if (selectedTeam === 0) {
         toast.error("You haven't selected a team!");
@@ -72,6 +74,12 @@ const checkValidity = ({
         return false;
     } else if (habBonus === "") {
         toast.error("You haven't provided the habitat bonus info!");
+        return false;
+    } else if (cargoDropped < 0) {
+        toast.error("You have not provided cargo drop count");
+        return false;
+    } else if (hatchesDropped < 0) {
+        toast.error("You have not provided hatches drop count");
         return false;
     } else if (!doubleChecked) {
         toast.error("Please double check before submitting!");
@@ -152,8 +160,8 @@ const EnterInfo = ({ currentUser }) => {
         bay8: NONE,
     });
     const [habBonus, setHabBonus] = useState("");
-    const [cargoDropped, setCargoDropped] = useState(0);
-    const [hatchesDropped, setHatchesDropped] = useState(0);
+    const [cargoDropped, setCargoDropped] = useState(-1);
+    const [hatchesDropped, setHatchesDropped] = useState(-1);
     const [observations, setObservations] = useState("");
     const [doubleChecked, setDoubleChecked] = useState(false);
 
@@ -249,7 +257,9 @@ const EnterInfo = ({ currentUser }) => {
                 side,
                 selectedAuton,
                 habBonus,
-                doubleChecked
+                doubleChecked,
+                cargoDropped,
+                hatchesDropped
             });
             if (valid) {
                 toast.info("Submitting data...");
@@ -317,8 +327,8 @@ const EnterInfo = ({ currentUser }) => {
                 });
                 setHabBonus("");
                 setObservations("");
-                setCargoDropped(0);
-                setHatchesDropped(0);
+                setCargoDropped(-1);
+                setHatchesDropped(-1);
                 setDoubleChecked(false);
             }
         }}>Submit</BlueButton>

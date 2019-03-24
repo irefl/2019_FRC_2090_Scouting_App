@@ -4,8 +4,6 @@ import { countCargo } from "../../Stats/TeamStats/GetDataObjects/GetDataObjects"
 const DataCalculator = (data) => {
     let cargoScores = {};
 
-    console.log(data);
-
     Object.keys(data).forEach(team => {
         const matchData = data[team] && data[team].match_data ? data[team].match_data : {}
         let matchCount = Object.keys(matchData).length;

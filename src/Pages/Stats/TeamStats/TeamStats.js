@@ -45,7 +45,7 @@ const TeamStats = ({ teamData, selectedTeam }) => {
     })
 
     matchData = matchData.sort((a, b) => {
-        return a.matchNumber < b.matchNumber;
+        return a.matchNumber - b.matchNumber;
     })
     return <>
         <h2>Viewing data about Team {selectedTeam}</h2>
