@@ -330,6 +330,7 @@ const EnterInfo = ({ currentUser }) => {
                 setCargoDropped(-1);
                 setHatchesDropped(-1);
                 setDoubleChecked(false);
+                window.scroll(0, 0);
             }
         }}>Submit</BlueButton>
         <hr />
