@@ -83,4 +83,42 @@ const TeamsMapping = {
     7898: "Cool Geeks"
 }
 
-export { Teams, TeamsMapping }
+const TeamsInit = {
+    359: true,
+    368: true,
+    2090: true,
+    2437: true,
+    2438: true,
+    2439: true,
+    2441: true,
+    2443: true,
+    2444: true,
+    2445: true,
+    2465: true,
+    2477: true,
+    2504: true,
+    2853: true,
+    2896: true,
+    3008: true,
+    3721: true,
+    3800: true,
+    3878: true,
+    3882: true,
+    4253: true,
+    4270: true,
+    5515: true,
+    5701: true,
+    6704: true,
+    6766: true,
+    6909: true,
+    6998: true,
+    7497: true,
+    7505: true,
+    7548: true,
+    7550: true,
+    7631: true,
+    7724: true,
+    7898: true
+}
+
+export { Teams, TeamsMapping, TeamsInit }
