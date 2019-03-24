@@ -19,6 +19,7 @@ import { toast } from 'react-toastify';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import Spacer from '../../Components/Spacer';
+import CargoAndHatchesDropped from './CargoAndHatchesDropped/CargoAndHatchesDropped';
 
 const { NONE, CARGO, CARGO_AND_HATCH, HATCH } = ScoringConfigurations;
 
@@ -150,6 +151,8 @@ const EnterInfo = ({ currentUser }) => {
         bay8: NONE,
     });
     const [habBonus, setHabBonus] = useState("");
+    const [cargoDropped, setCargoDropped] = useState(0);
+    const [hatchesDropped, setHatchesDropped] = useState(0);
     const [observations, setObservations] = useState("");
     const [doubleChecked, setDoubleChecked] = useState(false);
 
@@ -198,6 +201,13 @@ const EnterInfo = ({ currentUser }) => {
         <h3>Habitat Parking Bonus</h3>
         <HabLevelPicker {...{ habBonus, setHabBonus }} />
         <Spacer space={10} />
+
+        <h3>Cargo dropped</h3>
+        <CargoAndHatchesDropped value={cargoDropped} setValue={setCargoDropped} />
+
+        <h3>Hatches dropped</h3>
+        <CargoAndHatchesDropped value={hatchesDropped} setValue={setHatchesDropped} />
+
         <h2>Notes and observations (optional)</h2>
         <Input type="textarea" value={observations} onChange={(e) => {
             setObservations(e.target.value);
@@ -242,6 +252,8 @@ const EnterInfo = ({ currentUser }) => {
                     habBonus,
                     observations,
                     score,
+                    hatchesDropped,
+                    cargoDropped,
                     whoAdded: currentUser.displayName || currentUser.email
                 });
 
@@ -285,6 +297,8 @@ const EnterInfo = ({ currentUser }) => {
                 });
                 setHabBonus("");
                 setObservations("");
+                setCargoDropped(0);
+                setHatchesDropped(0);
                 setDoubleChecked(false);
             }
         }}>Submit</BlueButton>

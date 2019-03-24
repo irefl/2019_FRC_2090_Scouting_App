@@ -1,18 +1,12 @@
 /**
  * 
- * hi_reg = requests.get(url="https://www.thebluealliance.com/api/v3/event/2018hiho/teams/simple", headers=headers)
- * 
- * teams = hi_reg.json()
- * finalteams = []
- * for team in teams:
- *    finalteams.append({
- *      "team_number": team["team_number"],
- *      "nickname": team["nickname"]
- *    })
- * def sortKey(elem):
- *   return elem["team_number"]
- * finalteams.sort(key=sortKey)
- * finalteams
+ * let teamsMapping = {}
+document.querySelectorAll(".team-name").forEach(d => {
+	let text = d.children[0].innerText;
+	let split = text.split("\n");
+	let teamNumber = Number(split[0])
+	teamsMapping[teamNumber] = split[1]
+})
  */
 
 const Teams = [359,
