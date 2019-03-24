@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/2019_FRC_2090_Scouting_App/precache-manifest.d68e784aacc8dd892a4d1f4111d37646.js"
+  "/2019_FRC_2090_Scouting_App/precache-manifest.a0789d8459efa7e59b93966856feab69.js"
 );
 
 workbox.clientsClaim();
