@@ -7,15 +7,15 @@ const CustomTick = ({ x, y, stroke, payload }) => {
     return <>
         <g transform={`translate(${x},${y})`}>
             <text x={0} y={0} dy={
-                window.innerWidth < 1000 ? 3 : 6} textAnchor="end" fill="#666" transform="rotate(-90)" fontSize={
-                    window.innerWidth < 1000 ? 8 : 16}>{payload.value}</text>
+                window.innerWidth < 550 ? 3 : 6} textAnchor="end" fill="#666" transform="rotate(-90)" fontSize={
+                    window.innerWidth < 550 ? 8 : 16}>{payload.value}</text>
         </g>
     </>
 }
 
 const GeneralBarChart = ({ data, dataKey }) => {
     return <BarChart
-        width={window.innerWidth < 1000 ? 300 : 1000}
+        width={window.innerWidth < 550 ? 300 : 550}
         height={250}
         data={data}
         margin={{ top: 0, right: 0, left: 0, bottom: 13 }}>

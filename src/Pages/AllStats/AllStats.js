@@ -8,12 +8,13 @@ import { TeamsInit } from '../../Assets/Teams/Teams';
 import TeamSelector from './TeamSelector/TeamSelector';
 import DataCalculator from './DataCalculator/DataCalculator';
 import GeneralBarChart from './GeneralBarChart/GeneralBarChart';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const AllStats = ({ currentUser }) => {
     const [info, setCalculatedInfo] = useState({});
     const [loading, setLoading] = useState(true);
     const [teamsToInclude, setTeamsToInclude] = useState(TeamsInit);
-
+    const [sortByBest, setSortByBest] = useState(false)
     useEffect(() => {
         const dataRef = firebase.database().ref("2019data");
         dataRef.on('value', (snap) => {
@@ -53,14 +54,41 @@ const AllStats = ({ currentUser }) => {
     let highestOverallScore = ["Nobody", 0];
     let autonScoreData = [];
     let highestAutonScore = ["Nobody", 0];
+    let rocketScoreData = [];
+    let highestRocketScore = ["Nobody", 0];
+    let cargoScoreData = [];
+    let highestCargoScore = ["Nobody", 0];
 
     teamsArr.forEach(team => {
         let cargoScoreCurr = info.cargoScores[team];
         let hatchScoreCurr = info.hatchScores[team];
         let overallScoreCurr = info.overallScores[team];
         let autonScoreCurr = info.autonScores[team];
+        let rocketOverallCurr = info.rocketOverallScores[team];
+        let cargoShipOverallCurr = info.cargoShipOverallScores[team];
 
-        if (autonScoreCurr || autonScoreCurr == 0) {
+        if (rocketOverallCurr || rocketOverallCurr === 0) {
+            rocketScoreData.push({
+                name: team,
+                count: rocketOverallCurr
+            });
+            if (rocketOverallCurr > highestRocketScore[1]) {
+                highestRocketScore = [team, rocketOverallCurr];
+            }
+        }
+
+        if (cargoShipOverallCurr || cargoShipOverallCurr === 0) {
+            cargoScoreData.push({
+                name: team,
+                count: cargoShipOverallCurr
+            });
+            if (cargoShipOverallCurr > highestCargoScore[1]) {
+                highestCargoScore = [team, cargoShipOverallCurr];
+            }
+        }
+
+
+        if (autonScoreCurr || autonScoreCurr === 0) {
             autonScoreData.push({
                 name: team,
                 score: autonScoreCurr
@@ -70,7 +98,7 @@ const AllStats = ({ currentUser }) => {
             }
         }
 
-        if (overallScoreCurr || overallScoreCurr == 0) {
+        if (overallScoreCurr || overallScoreCurr === 0) {
             overallBothScoreData.push({
                 name: team,
                 count: overallScoreCurr
@@ -80,7 +108,7 @@ const AllStats = ({ currentUser }) => {
             }
         }
 
-        if (cargoScoreCurr || cargoScoreCurr == 0) {
+        if (cargoScoreCurr || cargoScoreCurr === 0) {
             avgCargoScoreData.push({
                 name: team,
                 count: cargoScoreCurr
@@ -90,7 +118,7 @@ const AllStats = ({ currentUser }) => {
             }
         }
 
-        if (hatchScoreCurr || hatchScoreCurr == 0) {
+        if (hatchScoreCurr || hatchScoreCurr === 0) {
             avgHatchScoreData.push({
                 name: team,
                 count: hatchScoreCurr
@@ -99,10 +127,33 @@ const AllStats = ({ currentUser }) => {
                 currHighestHatchAvg = [team, hatchScoreCurr];
             }
         }
-
-
     });
 
+    if (sortByBest) {
+        avgCargoScoreData = avgCargoScoreData.sort((a, b) => {
+            return b.count - a.count;
+        });
+
+        avgHatchScoreData = avgHatchScoreData.sort((a, b) => {
+            return b.count - a.count;
+        });
+
+        overallBothScoreData = overallBothScoreData.sort((a, b) => {
+            return b.count - a.count;
+        });
+
+        autonScoreData = autonScoreData.sort((a, b) => {
+            return b.score - a.score;
+        });
+
+        rocketScoreData = rocketScoreData.sort((a, b) => {
+            return b.count - a.count;
+        });
+
+        cargoScoreData = cargoScoreData.sort((a, b) => {
+            return b.count - a.count;
+        })
+    }
 
     return <>
         <Link to="/"><BlueButton>Back</BlueButton></Link>
@@ -110,40 +161,69 @@ const AllStats = ({ currentUser }) => {
         <h1>View all stats</h1>
 
         <h2>Click on a team to hide them</h2>
-        <TeamSelector {...{ teamsToInclude, setTeamsToInclude }} />
+        <TeamSelector {...{ teamsToInclude, setTeamsToInclude, sortByBest, setSortByBest }} />
 
-        {info && info.cargoScores && <>
-            <div style={{ textAlign: 'center' }}>
-                <h2>Average cargo scores</h2>
-                <h3>Higher is better (current highest: {currHighestCargoAvg[0]})</h3>
-            </div>
-            <GeneralBarChart data={avgCargoScoreData} dataKey={"count"} />
-        </>}
+        <Grid>
+            <Row>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.cargoScores && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2>Average cargo scores</h2>
+                            <h3>Higher is better (current highest: {currHighestCargoAvg[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={avgCargoScoreData} dataKey={"count"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.hatchScores && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Average hatch scores</h2>
+                            <h3>Higher is better (current highest: {currHighestHatchAvg[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={avgHatchScoreData} dataKey={"count"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.overallScores && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Average combined hatch + cargo</h2>
+                            <h3>Higher is better (current highest: {highestOverallScore[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={overallBothScoreData} dataKey={"count"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.autonScores && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Average auton performance</h2>
+                            <h3>Higher is better (current highest: {highestAutonScore[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={autonScoreData} dataKey={"score"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.rocketOverallScores && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Rocket performance</h2>
+                            <h3>Higher is better (current highest: {highestRocketScore[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={rocketScoreData} dataKey={"count"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.cargoShipOverallScores && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Cargo ship performance</h2>
+                            <h3>Higher is better (current highest: {highestCargoScore[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={cargoScoreData} dataKey={"count"} />
+                    </>}
+                </Col>
+            </Row>
+        </Grid>
 
-        {info && info.hatchScores && <>
-            <div style={{ textAlign: 'center' }}>
-                <h2 style={{ textAlign: 'center' }}>Average hatch scores</h2>
-                <h3>Higher is better (current highest: {currHighestHatchAvg[0]})</h3>
-            </div>
-            <GeneralBarChart data={avgHatchScoreData} dataKey={"count"} />
-        </>}
 
-        {info && info.overallScores && <>
-            <div style={{ textAlign: 'center' }}>
-                <h2 style={{ textAlign: 'center' }}>Average combined hatch + cargo</h2>
-                <h3>Higher is better (current highest: {highestOverallScore[0]})</h3>
-            </div>
-            <GeneralBarChart data={overallBothScoreData} dataKey={"count"} />
-        </>}
 
-        {info && info.autonScores && <>
-            <div style={{ textAlign: 'center' }}>
-                <h2 style={{ textAlign: 'center' }}>Average auton performance</h2>
-                <h3>Higher is better (current highest: {highestAutonScore[0]})</h3>
-            </div>
-            <GeneralBarChart data={autonScoreData} dataKey={"score"} />
-
-        </>}
 
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>

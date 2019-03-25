@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { Teams, TeamsInit, TeamsInitF } from '../../../Assets/Teams/Teams';
 import BlueButton from '../../../Components/BlueButton';
 
-const TeamSelector = ({ teamsToInclude, setTeamsToInclude }) => {
+const TeamSelector = ({ teamsToInclude, setTeamsToInclude, sortByBest, setSortByBest }) => {
     return <>
         <Grid>
             <Row>
@@ -13,6 +13,13 @@ const TeamSelector = ({ teamsToInclude, setTeamsToInclude }) => {
                 <Col><BlueButton style={{ margin: 10 }} onClick={() => {
                     setTeamsToInclude(TeamsInitF);
                 }}>Deselect all</BlueButton></Col>
+                <Col><div style={{ width: 2, height: '80%', backgroundColor: "#20508b" }}></div></Col>
+                <Col><BlueButton style={{ margin: 10 }} onClick={() => {
+                    setSortByBest(true);
+                }} disabled={sortByBest}>Sort by best</BlueButton></Col>
+                <Col><BlueButton style={{ margin: 10 }} onClick={() => {
+                    setSortByBest(false);
+                }} disabled={!sortByBest}>Sort by team</BlueButton></Col>
             </Row>
             <Row>
                 {Teams.map(team => {
