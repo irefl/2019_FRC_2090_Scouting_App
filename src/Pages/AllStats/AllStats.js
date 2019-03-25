@@ -58,6 +58,10 @@ const AllStats = ({ currentUser }) => {
     let highestRocketScore = ["Nobody", 0];
     let cargoScoreData = [];
     let highestCargoScore = ["Nobody", 0];
+    let cargoDropData = [];
+    let lowestCargoDropCount = ["Nobody", Infinity];
+    let hatchDropData = [];
+    let lowestHatchDropCount = ["Nobody", Infinity];
 
     teamsArr.forEach(team => {
         let cargoScoreCurr = info.cargoScores[team];
@@ -66,6 +70,28 @@ const AllStats = ({ currentUser }) => {
         let autonScoreCurr = info.autonScores[team];
         let rocketOverallCurr = info.rocketOverallScores[team];
         let cargoShipOverallCurr = info.cargoShipOverallScores[team];
+        let cargoDropCurr = info.cargoDropCounts[team];
+        let hatchDropCurr = info.hatchDropCounts[team];
+
+        if (cargoDropCurr || cargoDropCurr === 0) {
+            cargoDropData.push({
+                name: team,
+                count: cargoDropCurr
+            });
+            if (cargoDropCurr < lowestCargoDropCount[1]) {
+                lowestCargoDropCount = [team, cargoDropCurr];
+            }
+        }
+
+        if (hatchDropCurr || hatchDropCurr === 0) {
+            hatchDropData.push({
+                name: team,
+                count: hatchDropCurr
+            });
+            if (hatchDropCurr < lowestHatchDropCount[1]) {
+                lowestHatchDropCount = [team, hatchDropCurr];
+            }
+        }
 
         if (rocketOverallCurr || rocketOverallCurr === 0) {
             rocketScoreData.push({
@@ -152,6 +178,14 @@ const AllStats = ({ currentUser }) => {
 
         cargoScoreData = cargoScoreData.sort((a, b) => {
             return b.count - a.count;
+        });
+
+        cargoDropData = cargoDropData.sort((a, b) => {
+            return a.count - b.count;
+        });
+
+        hatchDropData = hatchDropData.sort((a, b) => {
+            return a.count - b.count;
         })
     }
 
@@ -217,6 +251,24 @@ const AllStats = ({ currentUser }) => {
                             <h3>Higher is better (current highest: {highestCargoScore[0]})</h3>
                         </div>
                         <GeneralBarChart data={cargoScoreData} dataKey={"count"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.cargoDropCounts && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Cargo drop averages</h2>
+                            <h3>Lower is better (current lowest: {lowestCargoDropCount[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={cargoDropData} dataKey={"count"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.hatchDropCounts && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Hatch drop averages</h2>
+                            <h3>Lower is better (current lowest: {lowestHatchDropCount[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={hatchDropData} dataKey={"count"} />
                     </>}
                 </Col>
             </Row>
