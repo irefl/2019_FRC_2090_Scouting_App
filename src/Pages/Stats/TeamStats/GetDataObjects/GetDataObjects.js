@@ -220,5 +220,7 @@ export {
     cargoScores,
     countCargo,
     allScores,
-    dropScores
+    dropScores,
+    countBoth,
+    calculateAutonLevel
 }

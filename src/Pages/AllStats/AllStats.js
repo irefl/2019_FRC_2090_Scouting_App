@@ -49,11 +49,38 @@ const AllStats = ({ currentUser }) => {
     let currHighestCargoAvg = ["Nobody", 0];
     let avgHatchScoreData = [];
     let currHighestHatchAvg = ["Nobody", 0];
+    let overallBothScoreData = [];
+    let highestOverallScore = ["Nobody", 0];
+    let autonScoreData = [];
+    let highestAutonScore = ["Nobody", 0];
 
     teamsArr.forEach(team => {
         let cargoScoreCurr = info.cargoScores[team];
         let hatchScoreCurr = info.hatchScores[team];
-        if (cargoScoreCurr) {
+        let overallScoreCurr = info.overallScores[team];
+        let autonScoreCurr = info.autonScores[team];
+
+        if (autonScoreCurr || autonScoreCurr == 0) {
+            autonScoreData.push({
+                name: team,
+                score: autonScoreCurr
+            });
+            if (autonScoreCurr > highestAutonScore[1]) {
+                highestAutonScore = [team, autonScoreCurr];
+            }
+        }
+
+        if (overallScoreCurr || overallScoreCurr == 0) {
+            overallBothScoreData.push({
+                name: team,
+                count: overallScoreCurr
+            });
+            if (overallScoreCurr > highestOverallScore[1]) {
+                highestOverallScore = [team, overallScoreCurr];
+            }
+        }
+
+        if (cargoScoreCurr || cargoScoreCurr == 0) {
             avgCargoScoreData.push({
                 name: team,
                 count: cargoScoreCurr
@@ -63,7 +90,7 @@ const AllStats = ({ currentUser }) => {
             }
         }
 
-        if (hatchScoreCurr) {
+        if (hatchScoreCurr || hatchScoreCurr == 0) {
             avgHatchScoreData.push({
                 name: team,
                 count: hatchScoreCurr
@@ -72,7 +99,10 @@ const AllStats = ({ currentUser }) => {
                 currHighestHatchAvg = [team, hatchScoreCurr];
             }
         }
-    })
+
+
+    });
+
 
     return <>
         <Link to="/"><BlueButton>Back</BlueButton></Link>
@@ -96,6 +126,23 @@ const AllStats = ({ currentUser }) => {
                 <h3>Higher is better (current highest: {currHighestHatchAvg[0]})</h3>
             </div>
             <GeneralBarChart data={avgHatchScoreData} dataKey={"count"} />
+        </>}
+
+        {info && info.overallScores && <>
+            <div style={{ textAlign: 'center' }}>
+                <h2 style={{ textAlign: 'center' }}>Average combined hatch + cargo</h2>
+                <h3>Higher is better (current highest: {highestOverallScore[0]})</h3>
+            </div>
+            <GeneralBarChart data={overallBothScoreData} dataKey={"count"} />
+        </>}
+
+        {info && info.autonScores && <>
+            <div style={{ textAlign: 'center' }}>
+                <h2 style={{ textAlign: 'center' }}>Average auton performance</h2>
+                <h3>Higher is better (current highest: {highestAutonScore[0]})</h3>
+            </div>
+            <GeneralBarChart data={autonScoreData} dataKey={"score"} />
+
         </>}
 
         <hr />
