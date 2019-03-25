@@ -62,6 +62,8 @@ const AllStats = ({ currentUser }) => {
     let lowestCargoDropCount = ["Nobody", Infinity];
     let hatchDropData = [];
     let lowestHatchDropCount = ["Nobody", Infinity];
+    let habBonuses = [];
+    let highestHabBonus = ["Nobody", 0];
 
     teamsArr.forEach(team => {
         let cargoScoreCurr = info.cargoScores[team];
@@ -72,6 +74,17 @@ const AllStats = ({ currentUser }) => {
         let cargoShipOverallCurr = info.cargoShipOverallScores[team];
         let cargoDropCurr = info.cargoDropCounts[team];
         let hatchDropCurr = info.hatchDropCounts[team];
+        let habBonusCurr = info.habBonuses[team];
+
+        if (habBonusCurr || habBonusCurr === 0) {
+            habBonuses.push({
+                name: team,
+                score: habBonusCurr
+            });
+            if (habBonusCurr > highestHabBonus[1]) {
+                highestHabBonus = [team, habBonusCurr];
+            }
+        }
 
         if (cargoDropCurr || cargoDropCurr === 0) {
             cargoDropData.push({
@@ -186,6 +199,10 @@ const AllStats = ({ currentUser }) => {
 
         hatchDropData = hatchDropData.sort((a, b) => {
             return a.count - b.count;
+        });
+
+        habBonuses = habBonuses.sort((a, b) => {
+            return b.score - a.score;
         })
     }
 
@@ -269,6 +286,15 @@ const AllStats = ({ currentUser }) => {
                             <h3>Lower is better (current lowest: {lowestHatchDropCount[0]})</h3>
                         </div>
                         <GeneralBarChart data={hatchDropData} dataKey={"count"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.habBonuses && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Hab Bonus Level Avgs</h2>
+                            <h3>Higher is better (current highest: {highestHabBonus[0]})</h3>
+                        </div>
+                        <GeneralBarChart data={habBonuses} dataKey={"score"} />
                     </>}
                 </Col>
             </Row>
