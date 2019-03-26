@@ -13,8 +13,9 @@ import ShowClimbs from './ShowClimbs/ShowClimbs';
 import AutoPerformance from './AutoPerformance/AutoPerformance';
 import Observations from './Observations/Observations';
 import DropCounts from './DropCounts/DropCounts';
+import PickupHatchPerformance from './PickupHatchPerformance/PickupHatchPerformance';
 
-const TeamStats = ({ teamData, selectedTeam }) => {
+const TeamStats = ({ teamData, selectedTeam, currentUser }) => {
     if (selectedTeam === 0) {
         return <><h2>Please select a team to view data about them</h2></>
     }
@@ -46,7 +47,10 @@ const TeamStats = ({ teamData, selectedTeam }) => {
 
     matchData = matchData.sort((a, b) => {
         return a.matchNumber - b.matchNumber;
-    })
+    });
+
+    console.log(teamData);
+
     return <>
         <h2>Viewing data about Team {selectedTeam}</h2>
 
@@ -57,6 +61,10 @@ const TeamStats = ({ teamData, selectedTeam }) => {
 
         <div><AddImage {...{ selectedTeam }} /></div>
         <Spacer space={10} />
+
+        <div><PickupHatchPerformance selectedTeam={selectedTeam} pickupHatchPerformance={teamData.pickupHatchPerformance} currentUser={currentUser}/></div>
+
+        {/* <div><PickupHatchPerformance pickupHatchPerformance = teamData.pickupHatchPerformance, currentUser /></div> */}
 
         {matchData.length > 0 ? <>
             <div style={{ margin: 'auto', textAlign: 'center' }}>
