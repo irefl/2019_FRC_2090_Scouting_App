@@ -86,27 +86,32 @@ const PickupHatchPerformance = ({pickupHatchPerformance, currentUser, selectedTe
         </Dropdown>
         <Spacer space={10} />
         <h3>What do others think?</h3>
-        <Grid>
-            <Row>
-                {Object.keys(pickupHatchPerformance).map((op, i) => {
-                    return <Col md={3} key={"op" + i}>
-                        <div style={{
-                            margin:10,
-                            backgroundColor: "#efefef",
-                            border: "2px solid #20508B",
-                            borderRadius: 4,
-                            padding: 5,
-                            textAlign: 'left'
-                        }}>
-                            <span style={{
-                                    fontWeight: 'bold'
-                                }}>{pickupHatchPerformance[op].displayName}: </span>
-                                {PickupHatchConstantsMapping[pickupHatchPerformance[op].ratingLevel]} 
-                        </div>
-                    </Col>
-                })}
-            </Row>
-        </Grid>
+        {!pickupHatchPerformance && <>
+            Cannot find any ratings
+        </>}
+        {pickupHatchPerformance && 
+            <Grid>
+                <Row>
+                    {Object.keys(pickupHatchPerformance).map((op, i) => {
+                        return <Col md={3} key={"op" + i}>
+                            <div style={{
+                                margin:10,
+                                backgroundColor: "#efefef",
+                                border: "2px solid #20508B",
+                                borderRadius: 4,
+                                padding: 5,
+                                textAlign: 'left'
+                            }}>
+                                <span style={{
+                                        fontWeight: 'bold'
+                                    }}>{pickupHatchPerformance[op].displayName}: </span>
+                                    {PickupHatchConstantsMapping[pickupHatchPerformance[op].ratingLevel]} 
+                            </div>
+                        </Col>
+                    })}
+                </Row>
+            </Grid>
+        }
         <hr />
     </>
 }
