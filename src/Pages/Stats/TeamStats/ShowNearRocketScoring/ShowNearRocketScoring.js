@@ -5,7 +5,7 @@ import MatchScoreChart from '../Charts/MatchScoreChart/MatchScoreChart';
 const ShowNearRocketScoring = ({ matchData }) => {
     let data = nearRocket(matchData);
     return <>
-        <h3>Total Scored on Near Rocket (hatch + cargo combined)</h3>
+        <h3>Total Scored on Relative Left Rocket (hatch + cargo combined)</h3>
         <MatchScoreChart data={data} />
     </>
 }

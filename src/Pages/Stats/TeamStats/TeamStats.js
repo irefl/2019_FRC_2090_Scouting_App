@@ -81,7 +81,8 @@ const TeamStats = ({ teamData, selectedTeam, currentUser }) => {
                         </Col>
                         {/* Show scoring on near and rocket */}
                         <Col md={6}>
-                            <h2>Near vs Far Rocket (which does the team prefer more?)</h2>
+                            <h2>Left vs Right Rocket (relative to the team, which does the team prefer more?)</h2>
+                            {/** For sake of not renaming files, Near is Left, Far is right. */}
                             <ShowNearRocketScoring {...{ matchData }} />
                             <ShowFarRocketScoring {...{ matchData }} />
                         </Col>

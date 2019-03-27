@@ -4,7 +4,7 @@ const nearRocket = (matches) => {
     return matches.map((match, i) => {
         return {
             match: i + 1,
-            score: countBoth(match.nearRocket)
+            score: match.side === "LEFT" ? countBoth(match.farRocket) : countBoth(match.nearRocket)
         }
     });
 }
@@ -14,7 +14,7 @@ const farRocket = (matches) => {
     return matches.map((match, i) => {
         return {
             match: i + 1,
-            score: countBoth(match.farRocket)
+            score: match.side === "RIGHT" ? countBoth(match.farRocket) : countBoth(match.nearRocket)
         }
     });
 }
