@@ -14,6 +14,7 @@ import AutoPerformance from './AutoPerformance/AutoPerformance';
 import Observations from './Observations/Observations';
 import DropCounts from './DropCounts/DropCounts';
 import PickupHatchPerformance from './PickupHatchPerformance/PickupHatchPerformance';
+import PitInfoShow from './PitInfoShow/PitInfoShow';
 
 const TeamStats = ({ teamData, selectedTeam, currentUser }) => {
     if (selectedTeam === 0) {
@@ -49,10 +50,10 @@ const TeamStats = ({ teamData, selectedTeam, currentUser }) => {
         return a.matchNumber - b.matchNumber;
     });
 
-
+    console.log(teamData);
     return <>
         <h2>Viewing data about Team {selectedTeam}</h2>
-
+        <p>See pit scouting info at bottom</p>
         <h3>Pictures</h3>
         {areImages ? <div className="carouselOut" style={{ width: window.innerWidth < 700 ? '100%' : '50%', margin: 'auto' }}>
             <UncontrolledCarousel items={items} autoPlay={false} interval={false} />
@@ -115,7 +116,14 @@ const TeamStats = ({ teamData, selectedTeam, currentUser }) => {
                 {/* Scroll through all previous matches */}
             </div>
         </> : <>There is no match data for this team.</>}
-    </>
+        <hr />
+        <h2>Pit scouting information</h2>
+        <h3>Aka what the teams <em>say</em> they can do</h3>
+        {teamData && teamData.pit_info ? <>
+            <PitInfoShow pitinfo={teamData.pit_info} />
+        </> : <>There is no pit info data yet</>}
+
+    </> 
 }
 
 export default TeamStats;

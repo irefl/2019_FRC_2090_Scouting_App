@@ -71,13 +71,13 @@ const PitInfo = () => {
             max: 2
         }}/>
         <h2>Main scoring method</h2>
-        <h3>0 for none, 1 for Hatch, 2 for Cargo, 3 for both</h3>
+        <h3>0 for none, 1 for Hatch, 2 for Cargo, 3 for Climb, 4 for Hatch and cargo, 5 for all three</h3>
         <ReliabilityInput {...{
             value: mainScoringMethod,
             setValue: setMainScoringMethod,
             name: "Main scoring method",
-            placeholder: "leave blank or enter 1, 2, or 3",
-            max: 3
+            placeholder: "leave blank or enter 1, 2, 3, 4, 5",
+            max: 5
         }}/>
 
         <div>
@@ -169,6 +169,7 @@ const PitInfo = () => {
                     hatchCircled,
                     cargoCircled,
                     timeToClimb,
+                    climbCircled,
                     climbReliability,
                     scoringStrats,
                     notes
