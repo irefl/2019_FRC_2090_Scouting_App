@@ -8,6 +8,9 @@ const pages = [{
     link: "/enterinfo",
     name: "Enter match info"
 }, {
+    link: "/enterpitscouting",
+    name: "Enter pit scouting info"
+}, {
     link: "/stats",
     name: "See statstics by team"
 }, {

@@ -9,6 +9,7 @@ import MainPage from './MainPage/MainPage';
 import EnterInfo from './EnterInfo/EnterInfo';
 import Stats from './Stats/Stats';
 import AllStats from './AllStats/AllStats';
+import PitInfo from './PitInfo/PitInfo';
 
 const Home = ({ currentUser }) => {
     const [canSee, setCanSee] = useState(false)
@@ -28,6 +29,7 @@ const Home = ({ currentUser }) => {
     if (loading) {
         return <>
             <LoadingSpinner />
+            <div>If you see this spinner for a while it means you do not have access to the page</div>
             <BlueButton style={{ marginTop: 10 }} onClick={() => {
                 firebase.auth().signOut();
             }}>Sign out</BlueButton>
@@ -41,8 +43,10 @@ const Home = ({ currentUser }) => {
                     <Switch>
                         <Route exact path="/" component={() => <MainPage currentUser={currentUser} />} />
                         <Route path="/enterinfo" component={() => <EnterInfo currentUser={currentUser} />} />
+                        <Route path="/enterpitscouting" component={() => <PitInfo currentUser={currentUser} />} /> 
                         <Route path="/stats" component={(r) => <Stats currentUser={currentUser} />} />
                         <Route path="/allstats" component={() => <AllStats currentUser={currentUser} />} />
+                        <Route component={() => <div>This page does not exist</div>} />
                     </Switch>
                 </Router>
             </>
