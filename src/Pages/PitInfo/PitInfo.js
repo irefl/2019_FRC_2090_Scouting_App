@@ -7,6 +7,9 @@ import { INIT_CIRCLED, INIT_CLIMB_CIRCLED } from './PitInfoConsts/PitInfoConsts'
 import Spacer from '../../Components/Spacer';
 import InputBox from './InputBox/InputBox';
 import ReliabilityInput from './ReliabilityInput/ReliabilityInput';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import {toast} from 'react-toastify';
 
 const PitInfo = () => {
     const [selectedTeam, setSelectedTeam] = useState(0);
@@ -27,7 +30,8 @@ const PitInfo = () => {
         <Link to="/"><BlueButton>Back</BlueButton></Link>
         <hr />
         <h1>Enter pit scouting information</h1>
-
+        <h2>Warning: If there is already data, you will be overriding it. Double check if you are not sure.</h2>
+        <h3>There is also no double checking, so please double check to make sure all inputs are filled or you will have to do it over.</h3>
         <TeamPicker {...{selectedTeam, setSelectedTeam}} />
         <Spacer space={10} />
 
@@ -67,13 +71,13 @@ const PitInfo = () => {
             max: 2
         }}/>
         <h2>Main scoring method</h2>
-        <h3>0 for none, 1 for Hatch, 2 for Cargo</h3>
+        <h3>0 for none, 1 for Hatch, 2 for Cargo, 3 for both</h3>
         <ReliabilityInput {...{
             value: mainScoringMethod,
             setValue: setMainScoringMethod,
             name: "Main scoring method",
-            placeholder: "leave blank or enter 1, or 2",
-            max: 2
+            placeholder: "leave blank or enter 1, 2, or 3",
+            max: 3
         }}/>
 
         <div>
@@ -126,7 +130,56 @@ const PitInfo = () => {
             setValue: setTimeToClimb, 
             name: "Time to climb",
             placeholder: "eg. 5 seconds, quick"}}/>
+        <h2>Climb reliability</h2>
+        <ReliabilityInput {...{
+            value: climbReliability,
+            setValue: setClimbReliability,
+            name: "Climb Reliability",
+            placeholder: "1-10",
+            max: 10
+        }}/>
+        <Spacer space={5} />
+        <h2>Scoring strats</h2>
+        <InputBox {...{
+            value: scoringStrats, 
+            setValue: setScoringStrats, 
+            name: "Scoring strategies",
+            placeholder: ""}}/>
+        
+        <h2>Notes</h2>
+        <InputBox {...{
+            value: notes, 
+            setValue: setNotes, 
+            name: "Notes",
+            placeholder: "notes"}}/>
         <hr />
+        <BlueButton onClick={async () => {
+            toast.info("Submitting info...");
+            if (selectedTeam === 0) {
+                toast.error("You must select a team");
+                return;
+            }
+            try {
+                await firebase.database().ref(`2019data/${selectedTeam}/pit_info`).set({
+                    driveType,
+                    reliability, 
+                    maxStartingPos,
+                    preGamePreference,
+                    mainScoringMethod,
+                    hatchCircled,
+                    cargoCircled,
+                    timeToClimb,
+                    climbReliability,
+                    scoringStrats,
+                    notes
+                });
+                toast.success("Success! Info set.")
+            } catch(e) {
+                toast.error(`Error submitting info: ${e.message}`)
+            }
+
+        }}>Submit</BlueButton>
+
         <Link to="/"><BlueButton>Back</BlueButton></Link>
     </>
 }
