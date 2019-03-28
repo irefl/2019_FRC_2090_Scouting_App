@@ -61,7 +61,7 @@ const TeamStats = ({ teamData, selectedTeam, currentUser }) => {
         <div><AddImage {...{ selectedTeam }} /></div>
         <Spacer space={10} />
 
-        <div><PickupHatchPerformance selectedTeam={selectedTeam} pickupHatchPerformance={teamData.pickupHatchPerformance} currentUser={currentUser}/></div>
+        {teamData && <div><PickupHatchPerformance selectedTeam={selectedTeam} pickupHatchPerformance={teamData.pickupHatchPerformance} currentUser={currentUser}/></div>}
 
         {/* <div><PickupHatchPerformance pickupHatchPerformance = teamData.pickupHatchPerformance, currentUser /></div> */}
 
