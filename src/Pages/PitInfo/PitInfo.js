@@ -77,12 +77,55 @@ const PitInfo = () => {
         }}/>
 
         <div>
-            {/* <h2 */}
-            <Label check>
-                
-            </Label>
+            <h2>Hatch</h2>
+            {["L3", "L2", "L1", "Cargo", "None"].map((d,i) => {
+                return <div key={"h" + i}><Label check >
+                    <Input type="checkbox" 
+                        checked={hatchCircled[d]}
+                        onChange={() => {
+                            setHatchCircled({...hatchCircled, [d]: !hatchCircled[d]});
+                        }}
+                    />
+                    {d}
+                </Label></div>
+            })}
         </div>
 
+        <div>
+            <h2>Cargo</h2>
+            {["L3", "L2", "L1", "Cargo", "None"].map((d,i) => {
+                return <div key={"h" + i}><Label check >
+                    <Input type="checkbox" 
+                        checked={cargoCircled[d]}
+                        onChange={() => {
+                            setCargoCircled({...cargoCircled, [d]: !cargoCircled[d]});
+                        }}
+                    />
+                    {d}
+                </Label></div>
+            })}
+        </div>
+
+        <div>
+            <h2>Climb</h2>
+            {["L3", "L2", "L1", "None"].map((d,i) => {
+                return <div key={"h" + i}><Label check >
+                    <Input type="checkbox" 
+                        checked={climbCircled[d]}
+                        onChange={() => {
+                            setClimbCircled({...climbCircled, [d]: !climbCircled[d]});
+                        }}
+                    />
+                    {d}
+                </Label></div>
+            })}
+        </div>
+        <Spacer space={10} />
+        <InputBox {...{
+            value: timeToClimb, 
+            setValue: setTimeToClimb, 
+            name: "Time to climb",
+            placeholder: "eg. 5 seconds, quick"}}/>
         <hr />
         <Link to="/"><BlueButton>Back</BlueButton></Link>
     </>
