@@ -50,7 +50,6 @@ const TeamStats = ({ teamData, selectedTeam, currentUser }) => {
         return a.matchNumber - b.matchNumber;
     });
 
-    console.log(teamData);
     return <>
         <h2>Viewing data about Team {selectedTeam}</h2>
         <p>See pit scouting info at bottom</p>
