@@ -16,6 +16,7 @@ const MatchSchedule = () => {
         <Link to="/"><BlueButton>Back</BlueButton></Link>
         <h1>Match schedule</h1>
         <h3>Click on a team to go to their info page</h3>
+        <h3>Click on a match (if highlighted) to go to that match on Twitch</h3>
         <Table bordered size="sm" responsive>
             <thead>
                 <tr>
@@ -31,7 +32,7 @@ const MatchSchedule = () => {
             <tbody>
                 {orderedMatches.map(match => {
                     return <tr key={match}>
-                        <th>{match}</th>
+                        <th>{Matches[match].video ? <a style={{backgroundColor: "#eeee00"}} href={Matches[match].video}>{match}</a> : match}</th>
                         {Matches[match].blueTeams.map(blueTeam => {
                             return <td key={"bl-"+match+blueTeam} className={blueTeam === 2090 ? "punahou" :"blue"}><Link to={`/stats/${blueTeam}`}><strong>{blueTeam}</strong> - {TeamsMapping[blueTeam]}</Link></td>
                         })}
