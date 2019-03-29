@@ -15,7 +15,7 @@ const MatchSchedule = () => {
     return <>
         <Link to="/"><BlueButton>Back</BlueButton></Link>
         <h1>Match schedule</h1>
-
+        <h3>Click on a team to go to their info page</h3>
         <Table bordered size="sm" responsive>
             <thead>
                 <tr>
@@ -33,10 +33,10 @@ const MatchSchedule = () => {
                     return <tr key={match}>
                         <th>{match}</th>
                         {Matches[match].blueTeams.map(blueTeam => {
-                            return <td key={"bl-"+match+blueTeam} className={blueTeam === 2090 ? "punahou" :"blue"}><strong>{blueTeam}</strong> - {TeamsMapping[blueTeam]}</td>
+                            return <td key={"bl-"+match+blueTeam} className={blueTeam === 2090 ? "punahou" :"blue"}><Link to={`/stats/${blueTeam}`}><strong>{blueTeam}</strong> - {TeamsMapping[blueTeam]}</Link></td>
                         })}
                         {Matches[match].redTeams.map(redTeam => {
-                            return <td key={"bl-"+match+redTeam} className={redTeam === 2090 ? "punahou" : "red"}><strong>{redTeam}</strong> - {TeamsMapping[redTeam]}</td>
+                            return <td key={"bl-"+match+redTeam} className={redTeam === 2090 ? "punahou" : "red"}><Link to={`/stats/${redTeam}`}><strong>{redTeam}</strong> - {TeamsMapping[redTeam]}</Link></td>
                         })}
                     </tr>   
                 })}

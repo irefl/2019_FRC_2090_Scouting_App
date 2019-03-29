@@ -8,10 +8,17 @@ import TeamStats from './TeamStats/TeamStats';
 import TeamPicker from '../../Components/TeamPicker/TeamPicker';
 import Spacer from '../../Components/Spacer';
 
-const Stats = ({ currentUser }) => {
+const Stats = ({ currentUser, match }) => {
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);;
+    const [loading, setLoading] = useState(true);
     const [selectedTeam, setSelectedTeam] = useState(0);
+
+    // console.log(match);
+    useEffect(() => {
+        if(match && match.params && match.params.team) {
+            setSelectedTeam(Number(match.params.team));
+        }
+    }, []);
 
     useEffect(() => {
         const dataRef = firebase.database().ref("2019data");

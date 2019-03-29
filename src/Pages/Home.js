@@ -45,7 +45,8 @@ const Home = ({ currentUser }) => {
                         <Route exact path="/" component={() => <MainPage currentUser={currentUser} />} />
                         <Route path="/enterinfo" component={() => <EnterInfo currentUser={currentUser} />} />
                         <Route path="/enterpitscouting" component={() => <PitInfo currentUser={currentUser} />} /> 
-                        <Route path="/stats" component={(r) => <Stats currentUser={currentUser} />} />
+                        <Route exact path="/stats" component={(r) => <Stats currentUser={currentUser} />} />
+                        <Route path="/stats/:team" component={(r) => <Stats {...r} currentUser={currentUser} />} />
                         <Route path="/allstats" component={() => <AllStats currentUser={currentUser} />} />
                         <Route path="/matchschedule" component={() => <MatchSchedule />} />
                         <Route component={() => <div>This page does not exist</div>} />
