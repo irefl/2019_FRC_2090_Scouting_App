@@ -10,6 +10,7 @@ import EnterInfo from './EnterInfo/EnterInfo';
 import Stats from './Stats/Stats';
 import AllStats from './AllStats/AllStats';
 import PitInfo from './PitInfo/PitInfo';
+import MatchSchedule from './MatchSchedule/MatchSchedule';
 
 const Home = ({ currentUser }) => {
     const [canSee, setCanSee] = useState(false)
@@ -46,6 +47,7 @@ const Home = ({ currentUser }) => {
                         <Route path="/enterpitscouting" component={() => <PitInfo currentUser={currentUser} />} /> 
                         <Route path="/stats" component={(r) => <Stats currentUser={currentUser} />} />
                         <Route path="/allstats" component={() => <AllStats currentUser={currentUser} />} />
+                        <Route path="/matchschedule" component={() => <MatchSchedule />} />
                         <Route component={() => <div>This page does not exist</div>} />
                     </Switch>
                 </Router>

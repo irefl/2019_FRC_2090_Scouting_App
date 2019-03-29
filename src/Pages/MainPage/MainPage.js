@@ -16,6 +16,9 @@ const pages = [{
 }, {
     link: "/allstats",
     name: "See all team statistics"
+}, {
+    link: "/matchschedule",
+    name: "See match schedule"
 }];
 
 const MainPage = ({ currentUser }) => {
