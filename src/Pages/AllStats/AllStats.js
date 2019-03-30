@@ -9,12 +9,15 @@ import TeamSelector from './TeamSelector/TeamSelector';
 import DataCalculator from './DataCalculator/DataCalculator';
 import GeneralBarChart from './GeneralBarChart/GeneralBarChart';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import {Input} from 'reactstrap';
+import {isEqual} from 'lodash';
 
 const AllStats = ({ currentUser }) => {
     const [info, setCalculatedInfo] = useState({});
     const [loading, setLoading] = useState(true);
     const [teamsToInclude, setTeamsToInclude] = useState(TeamsInit);
-    const [sortByBest, setSortByBest] = useState(false)
+    const [sortByBest, setSortByBest] = useState(false);
+    const [highlightedTeams, setHighlightedTeams] = useState({});
     useEffect(() => {
         const dataRef = firebase.database().ref("2019data");
         dataRef.on('value', (snap) => {
@@ -23,7 +26,6 @@ const AllStats = ({ currentUser }) => {
             setCalculatedInfo(calculatedInfo);
             setLoading(false);
         });
-
 
         return () => { dataRef.off(); }
     }, [])
@@ -205,15 +207,30 @@ const AllStats = ({ currentUser }) => {
             return b.score - a.score;
         })
     }
-
     return <>
         <Link to="/"><BlueButton>Back</BlueButton></Link>
         <hr />
         <h1>View all stats</h1>
 
-        <h2>Click on a team to hide them</h2>
+        <h2>Click on a team to hide/show them</h2>
         <TeamSelector {...{ teamsToInclude, setTeamsToInclude, sortByBest, setSortByBest }} />
-
+        <h3>Enter a comma separated list of teams to highlight them</h3>
+        <Input placeholder={"Enter team numbers, eg: 359,2090"} onChange={
+            (e) => {
+                if (e.target.value !== "") {
+                    let newThing = {}
+                    e.target.value.split(",").forEach(team => {
+                        let tToN = Number(team);
+                        if(TeamsInit[tToN]) {
+                            newThing[tToN] = true;
+                        }
+                    });
+                    if (!isEqual(newThing, highlightedTeams)) {
+                        setHighlightedTeams(newThing);
+                    }
+                }
+            }
+        }/>
         <Grid>
             <Row>
                 <Col md={6} sm={12} xs={12}>
@@ -222,7 +239,7 @@ const AllStats = ({ currentUser }) => {
                             <h2>Average cargo scores</h2>
                             <h3>Higher is better (current highest: {currHighestCargoAvg[0]})</h3>
                         </div>
-                        <GeneralBarChart data={avgCargoScoreData} dataKey={"count"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={avgCargoScoreData} dataKey={"count"} />
                     </>}
                 </Col>
                 <Col md={6} sm={12} xs={12}>
@@ -231,7 +248,7 @@ const AllStats = ({ currentUser }) => {
                             <h2 style={{ textAlign: 'center' }}>Average hatch scores</h2>
                             <h3>Higher is better (current highest: {currHighestHatchAvg[0]})</h3>
                         </div>
-                        <GeneralBarChart data={avgHatchScoreData} dataKey={"count"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={avgHatchScoreData} dataKey={"count"} />
                     </>}
                 </Col>
                 <Col md={6} sm={12} xs={12}>
@@ -240,7 +257,7 @@ const AllStats = ({ currentUser }) => {
                             <h2 style={{ textAlign: 'center' }}>Average combined hatch + cargo</h2>
                             <h3>Higher is better (current highest: {highestOverallScore[0]})</h3>
                         </div>
-                        <GeneralBarChart data={overallBothScoreData} dataKey={"count"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={overallBothScoreData} dataKey={"count"} />
                     </>}
                 </Col>
                 <Col md={6} sm={12} xs={12}>
@@ -249,7 +266,7 @@ const AllStats = ({ currentUser }) => {
                             <h2 style={{ textAlign: 'center' }}>Average auton performance</h2>
                             <h3>Higher is better (current highest: {highestAutonScore[0]})</h3>
                         </div>
-                        <GeneralBarChart data={autonScoreData} dataKey={"score"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={autonScoreData} dataKey={"score"} />
                     </>}
                 </Col>
                 <Col md={6} sm={12} xs={12}>
@@ -258,7 +275,7 @@ const AllStats = ({ currentUser }) => {
                             <h2 style={{ textAlign: 'center' }}>Rocket performance</h2>
                             <h3>Higher is better (current highest: {highestRocketScore[0]})</h3>
                         </div>
-                        <GeneralBarChart data={rocketScoreData} dataKey={"count"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={rocketScoreData} dataKey={"count"} />
                     </>}
                 </Col>
                 <Col md={6} sm={12} xs={12}>
@@ -267,7 +284,7 @@ const AllStats = ({ currentUser }) => {
                             <h2 style={{ textAlign: 'center' }}>Cargo ship performance</h2>
                             <h3>Higher is better (current highest: {highestCargoScore[0]})</h3>
                         </div>
-                        <GeneralBarChart data={cargoScoreData} dataKey={"count"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={cargoScoreData} dataKey={"count"} />
                     </>}
                 </Col>
                 <Col md={6} sm={12} xs={12}>
@@ -276,7 +293,7 @@ const AllStats = ({ currentUser }) => {
                             <h2 style={{ textAlign: 'center' }}>Cargo drop averages</h2>
                             <h3>Lower is better (current lowest: {lowestCargoDropCount[0]})</h3>
                         </div>
-                        <GeneralBarChart data={cargoDropData} dataKey={"count"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={cargoDropData} dataKey={"count"} />
                     </>}
                 </Col>
                 <Col md={6} sm={12} xs={12}>
@@ -285,7 +302,7 @@ const AllStats = ({ currentUser }) => {
                             <h2 style={{ textAlign: 'center' }}>Hatch drop averages</h2>
                             <h3>Lower is better (current lowest: {lowestHatchDropCount[0]})</h3>
                         </div>
-                        <GeneralBarChart data={hatchDropData} dataKey={"count"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={hatchDropData} dataKey={"count"} />
                     </>}
                 </Col>
                 <Col md={6} sm={12} xs={12}>
@@ -294,13 +311,11 @@ const AllStats = ({ currentUser }) => {
                             <h2 style={{ textAlign: 'center' }}>Hab Bonus Level Avgs</h2>
                             <h3>Higher is better (current highest: {highestHabBonus[0]})</h3>
                         </div>
-                        <GeneralBarChart data={habBonuses} dataKey={"score"} />
+                        <GeneralBarChart {...{highlightedTeams}} data={habBonuses} dataKey={"score"} />
                     </>}
                 </Col>
             </Row>
         </Grid>
-
-
 
 
         <hr />

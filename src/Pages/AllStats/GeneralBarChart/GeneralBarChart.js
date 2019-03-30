@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    BarChart, Bar, XAxis, YAxis, Tooltip
+    BarChart, Bar, XAxis, YAxis, Tooltip, Cell
 } from 'recharts';
 
 const CustomTick = ({ x, y, stroke, payload }) => {
@@ -13,7 +13,7 @@ const CustomTick = ({ x, y, stroke, payload }) => {
     </>
 }
 
-const GeneralBarChart = ({ data, dataKey }) => {
+const GeneralBarChart = ({ data, dataKey, highlightedTeams }) => {
     return <BarChart
         width={window.innerWidth < 550 ? 300 : 550}
         height={250}
@@ -23,7 +23,15 @@ const GeneralBarChart = ({ data, dataKey }) => {
         <YAxis label={{ value: dataKey, angle: -90, position: "insideLeft" }} />
         <Tooltip />
         {/* <Legend /> */}
-        <Bar dataKey={dataKey} fill="#20508B" />
+        {/* <Bar dataKey={dataKey} fill="#20508B" /> */}
+        <Bar dataKey={dataKey}>
+            {
+                data.map((entry, index) => (
+                    <Cell fill={highlightedTeams && highlightedTeams[entry.name] ? "#ff0000" : "#20508b"}
+                        key={"cell"+index} />
+                ))
+            }
+        </Bar>
     </BarChart>
 }
 
