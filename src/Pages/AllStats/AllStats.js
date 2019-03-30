@@ -66,6 +66,8 @@ const AllStats = ({ currentUser }) => {
     let lowestHatchDropCount = ["Nobody", Infinity];
     let habBonuses = [];
     let highestHabBonus = ["Nobody", 0];
+    let overallScores = [];
+    let highestOverallScoreCombinedAll = ["Nobody", 0];
 
     teamsArr.forEach(team => {
         let cargoScoreCurr = info.cargoScores[team];
@@ -77,6 +79,17 @@ const AllStats = ({ currentUser }) => {
         let cargoDropCurr = info.cargoDropCounts[team];
         let hatchDropCurr = info.hatchDropCounts[team];
         let habBonusCurr = info.habBonuses[team];
+        let scoreCurr = info.overallScoresAvg[team];
+        
+        if(scoreCurr || scoreCurr === 0) {
+            overallScores.push({
+                name: team,
+                score: scoreCurr
+            });
+            if(scoreCurr > highestOverallScoreCombinedAll[1]) {
+                highestOverallScoreCombinedAll = [team, scoreCurr];
+            }
+        }
 
         if (habBonusCurr || habBonusCurr === 0) {
             habBonuses.push({
@@ -205,6 +218,10 @@ const AllStats = ({ currentUser }) => {
 
         habBonuses = habBonuses.sort((a, b) => {
             return b.score - a.score;
+        });
+
+        overallScores = overallScores.sort((a,b) => {
+            return b.score - a.score;
         })
     }
     return <>
@@ -312,6 +329,15 @@ const AllStats = ({ currentUser }) => {
                             <h3>Higher is better (current highest: {highestHabBonus[0]})</h3>
                         </div>
                         <GeneralBarChart {...{highlightedTeams}} data={habBonuses} dataKey={"score"} />
+                    </>}
+                </Col>
+                <Col md={6} sm={12} xs={12}>
+                    {info && info.overallScoresAvg && <>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ textAlign: 'center' }}>Overall Individual Score Averages</h2>
+                            <h3>Higher is better (current highest: {highestOverallScoreCombinedAll[0]})</h3>
+                        </div>
+                        <GeneralBarChart {...{highlightedTeams}} data={overallScores} dataKey={"score"} />
                     </>}
                 </Col>
             </Row>

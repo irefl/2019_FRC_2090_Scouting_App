@@ -16,6 +16,7 @@ const DataCalculator = (data) => {
     let cargoDropCounts = {};
     let hatchDropCounts = {};
     let habBonuses = {};
+    let overallScoresAvg = {};
 
     if(data) {
 
@@ -31,6 +32,7 @@ const DataCalculator = (data) => {
             let cargoDropCount = 0;
             let hatchDropCount = 0;
             let habBonus = 0;
+            let overallScore = 0;
             Object.keys(matchData).forEach(matchKey => {
                 let match = matchData[matchKey]
     
@@ -47,6 +49,7 @@ const DataCalculator = (data) => {
                 cargoDropCount += match.cargoDropped;
                 hatchDropCount += match.hatchesDropped;
                 habBonus += match.habBonus;
+                overallScore += match.score;
             });
     
             if (matchCount > 0) {
@@ -59,6 +62,7 @@ const DataCalculator = (data) => {
                 cargoDropCounts[team] = cargoDropCount / matchCount;
                 hatchDropCounts[team] = hatchDropCount / matchCount;
                 habBonuses[team] = habBonus / matchCount;
+                overallScoresAvg[team] = overallScore / matchCount;
             }
         });
     }
@@ -72,7 +76,8 @@ const DataCalculator = (data) => {
         cargoShipOverallScores,
         cargoDropCounts,
         hatchDropCounts,
-        habBonuses
+        habBonuses,
+        overallScoresAvg
     };
 }
 
