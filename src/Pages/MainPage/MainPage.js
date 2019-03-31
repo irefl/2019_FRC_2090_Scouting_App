@@ -4,13 +4,15 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Link } from 'react-router-dom';
 
-const pages = [{
-    link: "/enterinfo",
-    name: "Enter match info"
-}, {
-    link: "/enterpitscouting",
-    name: "Enter pit scouting info"
-}, {
+const pages = [
+//     {
+//     link: "/enterinfo",
+//     name: "Enter match info"
+// }, {
+//     link: "/enterpitscouting",
+//     name: "Enter pit scouting info"
+// }, 
+{
     link: "/stats",
     name: "See statstics by team"
 }, {

@@ -16,7 +16,7 @@ const AllStats = ({ currentUser }) => {
     const [info, setCalculatedInfo] = useState({});
     const [loading, setLoading] = useState(true);
     const [teamsToInclude, setTeamsToInclude] = useState(TeamsInit);
-    const [sortByBest, setSortByBest] = useState(false);
+    const [sortByBest, setSortByBest] = useState(true);
     const [highlightedTeams, setHighlightedTeams] = useState({});
     useEffect(() => {
         const dataRef = firebase.database().ref("2019data");

@@ -11,15 +11,15 @@ const CargoComfort = ({ matchData }) => {
             <Row>
                 <Col md={6}>
                     <h3>Near side when on left</h3>
-                    <MatchScoreChart data={nearLeft} />
+                    <MatchScoreChart ylab={"Score"} data={nearLeft} />
                     <h3>Far side when on left</h3>
-                    <MatchScoreChart data={farLeft} />
+                    <MatchScoreChart ylab={"Score"} data={farLeft} />
                 </Col>
                 <Col md={6}>
                     <h3>Near side when on right</h3>
-                    <MatchScoreChart data={nearRight} />
+                    <MatchScoreChart ylab={"Score"} data={nearRight} />
                     <h3>Far side when on right</h3>
-                    <MatchScoreChart data={farRight} />
+                    <MatchScoreChart ylab={"Score"} data={farRight} />
                 </Col>
             </Row>
         </Grid>

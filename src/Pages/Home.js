@@ -17,7 +17,7 @@ const Home = ({ currentUser }) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const canSeeRef = firebase.database().ref("canSee");
+        const canSeeRef = firebase.database().ref("canSee2019");
         canSeeRef.on('value', (snap) => {
             let value = snap.val() || false;
             setCanSee(value);
@@ -43,8 +43,8 @@ const Home = ({ currentUser }) => {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={() => <MainPage currentUser={currentUser} />} />
-                        <Route path="/enterinfo" component={() => <EnterInfo currentUser={currentUser} />} />
-                        <Route path="/enterpitscouting" component={() => <PitInfo currentUser={currentUser} />} /> 
+                        {/* <Route path="/enterinfo" component={() => <EnterInfo currentUser={currentUser} />} /> */}
+                        {/* <Route path="/enterpitscouting" component={() => <PitInfo currentUser={currentUser} />} />  */}
                         <Route exact path="/stats" component={(r) => <Stats currentUser={currentUser} />} />
                         <Route path="/stats/:team" component={(r) => <Stats {...r} currentUser={currentUser} />} />
                         <Route path="/allstats" component={() => <AllStats currentUser={currentUser} />} />
