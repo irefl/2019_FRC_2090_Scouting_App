@@ -21,9 +21,6 @@ const Observations = ({ matchData }) => {
                                     color: "#20508B",
                                     fontWeight: 'bold'
                                 }}>Match {match.matchNumber}</div>
-                                <span style={{
-                                    fontWeight: 'bold'
-                                }}>{match.whoAdded}: </span>
                                 {match.observations}
                             </div>
                         </a>
